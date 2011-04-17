@@ -1,8 +1,7 @@
 #include "dmap_parser.h"
-#include <stdint.h>
 #include <string.h>
 
-typedef enum DMAP_FIELD {
+typedef enum {
 	DMAP_UNKNOWN,
 	DMAP_INT,
 	DMAP_STR,
@@ -11,7 +10,7 @@ typedef enum DMAP_FIELD {
 	DMAP_DICT
 } DMAP_FIELD;
 
-typedef struct dmap_type {
+typedef struct {
 	const char* code;
 	DMAP_FIELD type;
 	const char* name;
@@ -215,19 +214,32 @@ const char* dmap_name_from_code(const char* code) {
 int32_t dmap_read_i32(const char *buf)
 {
 	return ((buf[0] & 0xff) << 24) |
-    ((buf[1] & 0xff) << 16) |
-    ((buf[2] & 0xff) <<  8) |
-    ((buf[3] & 0xff));
+	((buf[1] & 0xff) << 16) |
+	((buf[2] & 0xff) <<  8) |
+	((buf[3] & 0xff));
+}
+
+int64_t dmap_read_i64(const char *buf)
+{
+	return ((int64_t)(buf[0] & 0xff) << 56) |
+	((int64_t)(buf[1] & 0xff) << 48) |
+	((int64_t)(buf[2] & 0xff) << 40) |
+	((int64_t)(buf[3] & 0xff) << 32) |
+	((int64_t)(buf[4] & 0xff) << 24) |
+	((int64_t)(buf[5] & 0xff) << 16) |
+	((int64_t)(buf[6] & 0xff) <<  8) |
+	((int64_t)(buf[7] & 0xff));
 }
 
 int ischar(const char c) {
 	return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
 }
 
-int dmap_parse(const char* buf, int len) {
+int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 	dmap_type *t;
 	DMAP_FIELD field_type;
 	int field_len;
+	const char *field_name;
 	const char *p = buf;
 	const char *end = buf + len;
 	char code[5];
@@ -246,10 +258,12 @@ int dmap_parse(const char* buf, int len) {
 
 		if (t) {
 			field_type = t->type;
+			field_name = t->name;
 		} else {
 			/* Make a best guess of the type for forward compatibility.
 			This is especially useful for handling unknown dictionaries. */
 			field_type = DMAP_UNKNOWN;
+			field_name = code;
 
 			if (field_len >= 8) {
 				/* Look for a four char code followed by a length within the current field */
@@ -282,14 +296,13 @@ int dmap_parse(const char* buf, int len) {
 					case 1:
 						break;
 					case 4:
-					{
-						/* int test_int = dmap_read_i32(p); */
+						if (settings->on_int32)
+							settings->on_int32(settings->ctx, code, field_name, dmap_read_i32(p));
 						break;
-					}
 				}
 				break;
 			case DMAP_DICT:
-				dmap_parse(p, field_len);
+				dmap_parse(settings, p, field_len);
 				break;
 		}
 
