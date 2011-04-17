@@ -220,10 +220,14 @@ int32_t dmap_read_i32(const char *buf)
     ((buf[3] & 0xff));
 }
 
+int ischar(const char c) {
+	return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
+}
+
 int dmap_parse(const char* buf, int len) {
 	dmap_type *t;
+	DMAP_FIELD field_type;
 	int field_len;
-	char field_type;
 	const char *p = buf;
 	const char *end = buf + len;
 	char code[5];
@@ -237,22 +241,49 @@ int dmap_parse(const char* buf, int len) {
 		field_len = dmap_read_i32(p);
 		p += 4;
 
-		if (!t) {
-			// make a best guess of the type
-			field_type = DMAP_UNKNOWN;
-		} else {
+		if (field_len < 0 || p + field_len > end)
+			return -1;
+
+		if (t) {
 			field_type = t->type;
+		} else {
+			/* Make a best guess of the type for forward compatibility.
+			This is especially useful for handling unknown dictionaries. */
+			field_type = DMAP_UNKNOWN;
+
+			if (field_len >= 8) {
+				/* Look for a four char code followed by a length within the current field */
+				if (ischar(p[0]) && ischar(p[1]) && ischar(p[2]) && ischar(p[3])) {
+					if (dmap_read_i32(p + 4) < field_len)
+						field_type = DMAP_DICT;
+				}
+			}
+
+			if (field_type == DMAP_UNKNOWN) {
+				int i, is_string = 1;
+				for (i=0; i < field_len; i++) {
+					if (!isascii(p[i]) || p[i] == 0) {
+						is_string = 0;
+						break;
+					}
+				}
+
+				if (is_string)
+					field_type = DMAP_STR;
+				else if (field_len <= 8)
+					field_type = DMAP_INT;
+			}
 		}
 
 		switch (field_type) {
 			case DMAP_INT:
-				// Determine the integer's type based on its size
+				/* Determine the integer's type based on its size */
 				switch (field_len) {
 					case 1:
 						break;
 					case 4:
 					{
-						//int test_int = dmap_read_i32(p);
+						/* int test_int = dmap_read_i32(p); */
 						break;
 					}
 				}
