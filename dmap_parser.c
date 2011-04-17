@@ -207,6 +207,11 @@ dmap_type* dmap_type_from_code(const char* code) {
 	return 0;
 }
 
+const char* dmap_name_from_code(const char* code) {
+	dmap_type *t = dmap_type_from_code(code);
+	return t != 0 ? t->name : 0;
+}
+
 int32_t dmap_read_i32(const char *buf)
 {
 	return ((buf[0] & 0xff) << 24) |
