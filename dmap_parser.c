@@ -260,8 +260,7 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 			field_type = t->type;
 			field_name = t->name;
 		} else {
-			/* Make a best guess of the type for forward compatibility.
-			This is especially useful for handling unknown dictionaries. */
+			/* Make a best guess of the type for forward compatibility */
 			field_type = DMAP_UNKNOWN;
 			field_name = code;
 
@@ -282,10 +281,7 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 					}
 				}
 
-				if (is_string)
-					field_type = DMAP_STR;
-				else if (field_len <= 8)
-					field_type = DMAP_INT;
+				field_type = is_string ? DMAP_STR : DMAP_INT;
 			}
 		}
 
@@ -298,6 +294,14 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 					case 4:
 						if (settings->on_int32)
 							settings->on_int32(settings->ctx, code, field_name, dmap_read_i32(p));
+						break;
+					case 8:
+						if (settings->on_int64)
+							settings->on_int64(settings->ctx, code, field_name, dmap_read_i64(p));
+						break;
+					default:
+						if (settings->on_data)
+							settings->on_string(settings->ctx, code, field_name, p, field_len);
 						break;
 				}
 				break;
