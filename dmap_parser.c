@@ -301,6 +301,10 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 						break;
 				}
 				break;
+			case DMAP_STR:
+				if (settings->on_string)
+					settings->on_string(settings->ctx, code, field_name, p, field_len);
+				break;
 			case DMAP_DICT:
 				dmap_parse(settings, p, field_len);
 				break;

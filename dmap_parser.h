@@ -7,9 +7,11 @@ extern "C" {
 #include <stdint.h>
 
 typedef void (*dmap_int32_cb) (void *ctx, const char* code, const char* name, int32_t value);
+typedef void (*dmap_str_cb) (void *ctx, const char* code, const char* name, const char* value, int len);
 
 typedef struct {
 	dmap_int32_cb on_int32;
+	dmap_str_cb   on_string;
 	void *ctx;
 } dmap_settings;
 
