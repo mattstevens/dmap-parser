@@ -314,7 +314,7 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 						break;
 					default:
 						if (settings->on_data)
-							settings->on_string(settings->ctx, code, field_name, p, field_len);
+							settings->on_data(settings->ctx, code, field_name, p, field_len);
 						break;
 				}
 				break;
