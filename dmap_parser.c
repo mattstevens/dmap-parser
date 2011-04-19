@@ -211,6 +211,12 @@ const char* dmap_name_from_code(const char* code) {
 	return t != 0 ? t->name : 0;
 }
 
+int16_t dmap_read_i16(const char *buf)
+{
+	return ((buf[2] & 0xff) <<  8) |
+	((buf[3] & 0xff));
+}
+
 int32_t dmap_read_i32(const char *buf)
 {
 	return ((buf[0] & 0xff) << 24) |
@@ -290,6 +296,13 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 				/* Determine the integer's type based on its size */
 				switch (field_len) {
 					case 1:
+						/* TODO: Treat as char/bool? */
+						if (settings->on_int32)
+							settings->on_int32(settings->ctx, code, field_name, *p);
+						break;
+					case 2:
+						if (settings->on_int32)
+							settings->on_int32(settings->ctx, code, field_name, dmap_read_i16(p));
 						break;
 					case 4:
 						if (settings->on_int32)
