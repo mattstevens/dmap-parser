@@ -190,17 +190,17 @@ static dmap_type dmap_types[] = {
 	{ "mudl", DMAP_DICT, "dmap.deletedidlisting" },
 	{ "mupd", DMAP_DICT, "dmap.updateresponse" },
 	{ "musr", DMAP_INT,  "dmap.serverrevision" },
-	{ "muty", DMAP_INT,  "dmap.updatetype" },
-	{ 0, 0, 0 }
+	{ "muty", DMAP_INT,  "dmap.updatetype" }
 };
+static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
 dmap_type* dmap_type_from_code(const char* code) {
+	int i;
 	dmap_type* t = dmap_types;
-	while (t->code != 0) {
+	for (i = 0; i < dmap_type_count; i++,t++) {
 		if (strncmp(t->code, code, 4) == 0) {
 			return t;
 		}
-		t++;
 	}
 
 	return 0;
