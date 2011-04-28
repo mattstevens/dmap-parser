@@ -323,7 +323,11 @@ int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
 					settings->on_string(settings->ctx, code, field_name, p, field_len);
 				break;
 			case DMAP_DICT:
+				if (settings->on_dict_start)
+					settings->on_dict_start(settings->ctx, code, field_name);
 				dmap_parse(settings, p, field_len);
+				if (settings->on_dict_end)
+					settings->on_dict_end(settings->ctx, code, field_name);
 				break;
 		}
 
