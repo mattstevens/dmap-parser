@@ -6,10 +6,10 @@ extern "C" {
 
 #include <stdint.h>
 
-typedef void (*dmap_dict_cb) (void *ctx, const char* code, const char* name);
-typedef void (*dmap_int32_cb) (void *ctx, const char* code, const char* name, int32_t value);
-typedef void (*dmap_int64_cb) (void *ctx, const char* code, const char* name, int64_t value);
-typedef void (*dmap_data_cb)  (void *ctx, const char* code, const char* name, const char* buf, int len);
+typedef void (*dmap_dict_cb) (void *ctx, const char *code, const char *name);
+typedef void (*dmap_int32_cb) (void *ctx, const char *code, const char *name, int32_t value);
+typedef void (*dmap_int64_cb) (void *ctx, const char *code, const char *name, int64_t value);
+typedef void (*dmap_data_cb)  (void *ctx, const char *code, const char *name, const char *buf, int len);
 
 typedef struct {
 	dmap_dict_cb  on_dict_start;
@@ -21,8 +21,8 @@ typedef struct {
 	void *ctx;
 } dmap_settings;
 
-const char* dmap_name_from_code(const char* code);
-int dmap_parse(const dmap_settings* settings, const char* buf, int len);
+const char *dmap_name_from_code(const char *code);
+int dmap_parse(const dmap_settings *settings, const char *buf, int len);
 
 #ifdef __cplusplus
 }

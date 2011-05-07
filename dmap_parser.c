@@ -11,9 +11,9 @@ typedef enum {
 } DMAP_FIELD;
 
 typedef struct {
-	const char* code;
+	const char *code;
 	DMAP_FIELD type;
-	const char* name;
+	const char *name;
 } dmap_type;
 
 static dmap_type dmap_types[] = {
@@ -194,9 +194,9 @@ static dmap_type dmap_types[] = {
 };
 static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
-dmap_type* dmap_type_from_code(const char* code) {
+dmap_type *dmap_type_from_code(const char *code) {
 	int i;
-	dmap_type* t = dmap_types;
+	dmap_type *t = dmap_types;
 	for (i = 0; i < dmap_type_count; i++,t++) {
 		if (strncmp(t->code, code, 4) == 0) {
 			return t;
@@ -206,7 +206,7 @@ dmap_type* dmap_type_from_code(const char* code) {
 	return 0;
 }
 
-const char* dmap_name_from_code(const char* code) {
+const char *dmap_name_from_code(const char *code) {
 	dmap_type *t = dmap_type_from_code(code);
 	return t != 0 ? t->name : 0;
 }
@@ -241,7 +241,7 @@ int ischar(const char c) {
 	return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
 }
 
-int dmap_parse(const dmap_settings* settings, const char* buf, int len) {
+int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 	dmap_type *t;
 	DMAP_FIELD field_type;
 	int field_len;
