@@ -1,5 +1,6 @@
 #include "dmap_parser.h"
 #include <string.h>
+#include <ctype.h>
 
 typedef enum {
 	DMAP_UNKNOWN,
