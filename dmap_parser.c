@@ -283,7 +283,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 			if (field_type == DMAP_UNKNOWN) {
 				int i, is_string = 1;
 				for (i=0; i < field_len; i++) {
-					if (!isascii(p[i]) || p[i] == 0) {
+					if (!isascii(p[i]) || p[i] < 2) {
 						is_string = 0;
 						break;
 					}
