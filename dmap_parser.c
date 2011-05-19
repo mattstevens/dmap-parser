@@ -127,6 +127,7 @@ static dmap_type dmap_types[] = {
 	{ "caar", DMAP_INT,  "dacp.availablerepeatstates" }, /* some kind of ORed list? 1=disabled, 6=repeat all & repeat one enabled */
 	{ "caas", DMAP_INT,  "dacp.availablshufflestates" }, /* some kind of ORed list? 1=disabled, 2=enabled */
 	{ "caci", DMAP_DICT, "caci" },
+	{ "caia", DMAP_INT,  "dacp.isactive" },
 	{ "cana", DMAP_STR,  "dacp.nowplayingartist" },
 	{ "cang", DMAP_STR,  "dacp.nowplayinggenre" },
 	{ "canl", DMAP_STR,  "dacp.nowplayingalbum" },
