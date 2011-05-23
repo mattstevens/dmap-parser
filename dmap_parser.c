@@ -176,7 +176,7 @@ static dmap_type dmap_types[] = {
 	{ "msex", DMAP_INT,  "dmap.supportsextensions" },
 	{ "msix", DMAP_INT,  "dmap.supportsindex" },
 	{ "mslr", DMAP_INT,  "dmap.loginrequired" },
-	{ "msma", DMAP_INT,  "dmap.macaddress" },
+	{ "msma", DMAP_INT,  "dmap.machineaddress" },
 	{ "msml", DMAP_DICT, "msml" },
 	{ "mspi", DMAP_INT,  "dmap.supportspersistentids" },
 	{ "msqy", DMAP_INT,  "dmap.supportsquery" },
