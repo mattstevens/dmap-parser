@@ -127,6 +127,8 @@ static dmap_type dmap_types[] = {
 	{ "caar", DMAP_INT,  "dacp.availablerepeatstates" }, /* some kind of ORed list? 1=disabled, 6=repeat all & repeat one enabled */
 	{ "caas", DMAP_INT,  "dacp.availablshufflestates" }, /* some kind of ORed list? 1=disabled, 2=enabled */
 	{ "caci", DMAP_DICT, "caci" },
+	{ "cafe", DMAP_INT,  "dacp.fullscreenenabled" },
+	{ "cafs", DMAP_INT,  "dacp.fullscreen" },
 	{ "caia", DMAP_INT,  "dacp.isactive" },
 	{ "cana", DMAP_STR,  "dacp.nowplayingartist" },
 	{ "cang", DMAP_STR,  "dacp.nowplayinggenre" },
@@ -137,6 +139,8 @@ static dmap_type dmap_types[] = {
 	{ "cash", DMAP_INT,  "dacp.shufflestate" },
 	{ "casp", DMAP_DICT, "dacp.speakers" },
 	{ "cavc", DMAP_INT,  "dmcp.volumecontrollable" }, /* Should this be cavc? Was cmvc */
+	{ "cave", DMAP_INT,  "dacp.visualizerenabled" },
+	{ "cavs", DMAP_INT,  "dacp.visualizer" },
 	{ "ceJC", DMAP_INT,  "com.apple.itunes.jukebox.client.vote" },
 	{ "ceJI", DMAP_INT,  "com.apple.itunes.jukebox.current" },
 	{ "ceJS", DMAP_INT,  "com.apple.itunes.jukebox.score" },
