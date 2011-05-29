@@ -134,6 +134,7 @@ static dmap_type dmap_types[] = {
 	{ "cang", DMAP_STR,  "dacp.nowplayinggenre" },
 	{ "canl", DMAP_STR,  "dacp.nowplayingalbum" },
 	{ "cann", DMAP_STR,  "dacp.nowplayingname" },
+	{ "canp", DMAP_INT,  "dacp.nowplayingids" },
 	{ "caps", DMAP_INT,  "dacp.playerstate" },
 	{ "carp", DMAP_INT,  "dacp.repeatstate" },
 	{ "cash", DMAP_INT,  "dacp.shufflestate" },
