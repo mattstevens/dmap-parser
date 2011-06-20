@@ -244,7 +244,7 @@ int64_t dmap_read_i64(const char *buf)
 	((int64_t)(buf[7] & 0xff));
 }
 
-int ischar(const char c) {
+int dmap_is_codechar(const char c) {
 	return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
 }
 
@@ -279,7 +279,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 
 			if (field_len >= 8) {
 				/* Look for a four char code followed by a length within the current field */
-				if (ischar(p[0]) && ischar(p[1]) && ischar(p[2]) && ischar(p[3])) {
+				if (dmap_is_codechar(p[0]) && dmap_is_codechar(p[1]) && dmap_is_codechar(p[2]) && dmap_is_codechar(p[3])) {
 					if (dmap_read_i32(p + 4) < field_len)
 						field_type = DMAP_DICT;
 				}
