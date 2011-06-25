@@ -148,6 +148,7 @@ static dmap_type dmap_types[] = {
 	{ "ceJS", DMAP_INT,  "com.apple.itunes.jukebox.score" },
 	{ "ceJV", DMAP_INT,  "com.apple.itunes.jukebox.vote" },
 	{ "cmgt", DMAP_DICT, "dmcp.getpropertyresponse" },
+	{ "cmmk", DMAP_INT,  "dmcp.mediakind" },
 	{ "cmsr", DMAP_INT,  "dmcp.serverrevision" },
 	{ "cmst", DMAP_DICT, "dmcp.playstatus" },
 	{ "cmvo", DMAP_INT,  "dmcp.volume" },
