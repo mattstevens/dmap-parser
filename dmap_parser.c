@@ -1,4 +1,5 @@
 #include "dmap_parser.h"
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
@@ -201,16 +202,16 @@ static dmap_type dmap_types[] = {
 };
 static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
-dmap_type *dmap_type_from_code(const char *code) {
-	int i;
-	dmap_type *t = dmap_types;
-	for (i = 0; i < dmap_type_count; i++,t++) {
-		if (strncmp(t->code, code, 4) == 0) {
-			return t;
-		}
-	}
+int dmap_type_sort(const void *c1, const void *c2) {
+	dmap_type *t1 = (dmap_type *)c1;
+    dmap_type *t2 = (dmap_type *)c2;
+	return strncmp(t1->code, t2->code, 4);
+}
 
-	return 0;
+dmap_type *dmap_type_from_code(const char *code) {
+	dmap_type key;
+	key.code = code;
+	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), dmap_type_sort);
 }
 
 const char *dmap_name_from_code(const char *code) {
@@ -273,7 +274,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 			field_type = t->type;
 			field_name = t->name;
 		} else {
-			/* Make a best guess of the type for forward compatibility */
+			/* Make a best guess of the type */
 			field_type = DMAP_UNKNOWN;
 			field_name = code;
 
@@ -303,7 +304,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 				/* Determine the integer's type based on its size */
 				switch (field_len) {
 					case 1:
-						/* TODO: Treat as char/bool? */
+						/* TODO: Treat as char? */
 						if (settings->on_int32)
 							settings->on_int32(settings->ctx, code, field_name, *p);
 						break;
