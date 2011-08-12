@@ -16,6 +16,7 @@ typedef struct {
 	dmap_dict_cb  on_dict_end;
 	dmap_int32_cb on_int32;
 	dmap_int64_cb on_int64;
+	dmap_int32_cb on_date;
 	dmap_data_cb  on_string;
 	dmap_data_cb  on_data;
 	void *ctx;

@@ -1,4 +1,5 @@
 #include "dmap_parser.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -331,12 +332,26 @@ int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
 				if (settings->on_string)
 					settings->on_string(settings->ctx, code, field_name, p, field_len);
 				break;
+			case DMAP_DATE:
+				/* Seconds since epoch */
+				if (settings->on_date)
+					settings->on_date(settings->ctx, code, field_name, dmap_read_i32(p));
+				break;
+			case DMAP_VERS:
+				if (settings->on_string && field_len >= 4) {
+					char version[20];
+					sprintf(version, "%d.%d", dmap_read_i16(p), dmap_read_i16(p+2));
+					settings->on_string(settings->ctx, code, field_name, version, strlen(version));
+				}
+				break;
 			case DMAP_DICT:
 				if (settings->on_dict_start)
 					settings->on_dict_start(settings->ctx, code, field_name);
 				dmap_parse(settings, p, field_len);
 				if (settings->on_dict_end)
 					settings->on_dict_end(settings->ctx, code, field_name);
+				break;
+			case DMAP_UNKNOWN:
 				break;
 		}
 
