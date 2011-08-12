@@ -205,7 +205,7 @@ static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
 int dmap_type_sort(const void *c1, const void *c2) {
 	dmap_type *t1 = (dmap_type *)c1;
-    dmap_type *t2 = (dmap_type *)c2;
+	dmap_type *t2 = (dmap_type *)c2;
 	return strncmp(t1->code, t2->code, 4);
 }
 
