@@ -248,7 +248,7 @@ int64_t dmap_read_i64(const char *buf)
 }
 
 int dmap_is_codechar(const char c) {
-	return (c > 'A' && c < 'Z') || (c > 'a' && c < 'z');
+	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
 int dmap_parse(const dmap_settings *settings, const char *buf, int len) {
