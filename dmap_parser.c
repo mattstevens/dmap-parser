@@ -204,13 +204,13 @@ static dmap_type dmap_types[] = {
 };
 static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
-int dmap_type_sort(const void *c1, const void *c2) {
+static int dmap_type_sort(const void *c1, const void *c2) {
 	dmap_type *t1 = (dmap_type *)c1;
 	dmap_type *t2 = (dmap_type *)c2;
 	return strncmp(t1->code, t2->code, 4);
 }
 
-dmap_type *dmap_type_from_code(const char *code) {
+static dmap_type *dmap_type_from_code(const char *code) {
 	dmap_type key;
 	key.code = code;
 	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), dmap_type_sort);
@@ -221,13 +221,13 @@ const char *dmap_name_from_code(const char *code) {
 	return t != 0 ? t->name : 0;
 }
 
-int16_t dmap_read_i16(const char *buf)
+static int16_t dmap_read_i16(const char *buf)
 {
 	return ((buf[0] & 0xff) <<  8) |
 	((buf[1] & 0xff));
 }
 
-int32_t dmap_read_i32(const char *buf)
+static int32_t dmap_read_i32(const char *buf)
 {
 	return ((buf[0] & 0xff) << 24) |
 	((buf[1] & 0xff) << 16) |
@@ -235,7 +235,7 @@ int32_t dmap_read_i32(const char *buf)
 	((buf[3] & 0xff));
 }
 
-int64_t dmap_read_i64(const char *buf)
+static int64_t dmap_read_i64(const char *buf)
 {
 	return ((int64_t)(buf[0] & 0xff) << 56) |
 	((int64_t)(buf[1] & 0xff) << 48) |
@@ -247,7 +247,7 @@ int64_t dmap_read_i64(const char *buf)
 	((int64_t)(buf[7] & 0xff));
 }
 
-int dmap_is_codechar(const char c) {
+static int dmap_is_codechar(const char c) {
 	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
 }
 
