@@ -202,7 +202,7 @@ static dmap_type dmap_types[] = {
 	{ "musr", DMAP_INT,  "dmap.serverrevision" },
 	{ "muty", DMAP_INT,  "dmap.updatetype" }
 };
-static int dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
+static size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
 static int dmap_type_sort(const void *c1, const void *c2) {
 	dmap_type *t1 = (dmap_type *)c1;
