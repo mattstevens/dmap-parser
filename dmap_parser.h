@@ -5,11 +5,12 @@ extern "C" {
 #endif
 
 #include <stdint.h>
+#include <sys/types.h>
 
 typedef void (*dmap_dict_cb)  (void *ctx, const char *code, const char *name);
 typedef void (*dmap_int32_cb) (void *ctx, const char *code, const char *name, int32_t value);
 typedef void (*dmap_int64_cb) (void *ctx, const char *code, const char *name, int64_t value);
-typedef void (*dmap_data_cb)  (void *ctx, const char *code, const char *name, const char *buf, int len);
+typedef void (*dmap_data_cb)  (void *ctx, const char *code, const char *name, const char *buf, size_t len);
 
 typedef struct {
 	dmap_dict_cb  on_dict_start;
@@ -23,7 +24,7 @@ typedef struct {
 } dmap_settings;
 
 const char *dmap_name_from_code(const char *code);
-int dmap_parse(const dmap_settings *settings, const char *buf, int len);
+int dmap_parse(const dmap_settings *settings, const char *buf, size_t len);
 
 #ifdef __cplusplus
 }
