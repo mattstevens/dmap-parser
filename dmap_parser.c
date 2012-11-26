@@ -223,16 +223,16 @@ const char *dmap_name_from_code(const char *code) {
 
 static int16_t dmap_read_i16(const char *buf)
 {
-	return ((buf[0] & 0xff) <<  8) |
+	return (int16_t)((buf[0] & 0xff) <<  8) |
 	((buf[1] & 0xff));
 }
 
 static int32_t dmap_read_i32(const char *buf)
 {
-	return ((buf[0] & 0xff) << 24) |
-	((buf[1] & 0xff) << 16) |
-	((buf[2] & 0xff) <<  8) |
-	((buf[3] & 0xff));
+	return ((int32_t)(buf[0] & 0xff) << 24) |
+	((int32_t)(buf[1] & 0xff) << 16) |
+	((int32_t)(buf[2] & 0xff) <<  8) |
+	((int32_t)(buf[3] & 0xff));
 }
 
 static int64_t dmap_read_i64(const char *buf)
