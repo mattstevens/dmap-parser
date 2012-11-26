@@ -137,7 +137,9 @@ void on_date(void *ctx, const char *code, const char *name, int32_t value) {
 }
 
 void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
-	char* str = strndup(buf, len);
+	char *str = (char *)malloc(len + 1);
+	strncpy(str, buf, len);
+	str[len] = '\0';
 	append("%s: %s", name, str);
 	free(str);
 }
@@ -156,9 +158,10 @@ int main() {
 	settings.on_string = on_string;
 	settings.on_data = on_data;
 
+	size_t i;
 	size_t count = sizeof(tests) / sizeof(test);
 	printf("Running %zu tests\n", count);
-	for (size_t i = 0; i < count; i++) {
+	for (i = 0; i < count; i++) {
 		output[0] = '\0';
 		outpos = 0;
 		dmap_parse(&settings, tests[i].msg, tests[i].msglen);
