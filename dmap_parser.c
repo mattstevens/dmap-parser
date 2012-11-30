@@ -127,7 +127,7 @@ static dmap_type dmap_types[] = {
 	{ "ated", DMAP_INT,  "daap.supportsextradata" },
 	{ "avdb", DMAP_DICT, "daap.serverdatabases" },
 	{ "caar", DMAP_INT,  "dacp.availablerepeatstates" }, /* some kind of ORed list? 1=disabled, 6=repeat all & repeat one enabled */
-	{ "caas", DMAP_INT,  "dacp.availablshufflestates" }, /* some kind of ORed list? 1=disabled, 2=enabled */
+	{ "caas", DMAP_INT,  "dacp.availableshufflestates" }, /* some kind of ORed list? 1=disabled, 2=enabled */
 	{ "caci", DMAP_DICT, "caci" },
 	{ "cafe", DMAP_INT,  "dacp.fullscreenenabled" },
 	{ "cafs", DMAP_INT,  "dacp.fullscreen" },
