@@ -141,7 +141,7 @@ static dmap_type dmap_types[] = {
 	{ "carp", DMAP_INT,  "dacp.repeatstate" },
 	{ "cash", DMAP_INT,  "dacp.shufflestate" },
 	{ "casp", DMAP_DICT, "dacp.speakers" },
-	{ "cavc", DMAP_INT,  "dmcp.volumecontrollable" }, /* Should this be cavc? Was cmvc */
+	{ "cavc", DMAP_INT,  "dacp.volumecontrollable" },
 	{ "cave", DMAP_INT,  "dacp.visualizerenabled" },
 	{ "cavs", DMAP_INT,  "dacp.visualizer" },
 	{ "ceJC", DMAP_INT,  "com.apple.itunes.jukebox.client.vote" },
