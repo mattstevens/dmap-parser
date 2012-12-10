@@ -166,6 +166,7 @@ static dmap_type dmap_types[] = {
 	{ "cann", DMAP_STR,  "dacp.nowplayingname" },
 	{ "canp", DMAP_INT,  "dacp.nowplayingids" },
 	{ "cant", DMAP_INT,  "dacp.nowplayingtime" },
+	{ "capr", DMAP_VERS, "dacp.protocolversion" },
 	{ "caps", DMAP_INT,  "dacp.playerstate" },
 	{ "carp", DMAP_INT,  "dacp.repeatstate" },
 	{ "cash", DMAP_INT,  "dacp.shufflestate" },
@@ -180,6 +181,7 @@ static dmap_type dmap_types[] = {
 	{ "ceJV", DMAP_INT,  "com.apple.itunes.jukebox-vote" },
 	{ "cmgt", DMAP_DICT, "dmcp.getpropertyresponse" },
 	{ "cmmk", DMAP_INT,  "dmcp.mediakind" },
+	{ "cmpr", DMAP_VERS, "dmcp.protocolversion" },
 	{ "cmsr", DMAP_INT,  "dmcp.serverrevision" },
 	{ "cmst", DMAP_DICT, "dmcp.playstatus" },
 	{ "cmvo", DMAP_INT,  "dmcp.volume" },
@@ -232,7 +234,8 @@ static dmap_type dmap_types[] = {
 	{ "mudl", DMAP_DICT, "dmap.deletedidlisting" },
 	{ "mupd", DMAP_DICT, "dmap.updateresponse" },
 	{ "musr", DMAP_INT,  "dmap.serverrevision" },
-	{ "muty", DMAP_INT,  "dmap.updatetype" }
+	{ "muty", DMAP_INT,  "dmap.updatetype" },
+	{ "ppro", DMAP_VERS, "ppro" }
 };
 static size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
