@@ -75,7 +75,7 @@ static dmap_type dmap_types[] = {
 	{ "aeSN", DMAP_STR,  "com.apple.itunes.series-name" },
 	{ "aeSP", DMAP_INT,  "com.apple.itunes.smart-playlist" },
 	{ "aeSU", DMAP_INT,  "com.apple.itunes.season-num" },
-	{ "aeSV", DMAP_INT,  "com.apple.itunes.music-sharing-version" },
+	{ "aeSV", DMAP_VERS, "com.apple.itunes.music-sharing-version" },
 	{ "aeXD", DMAP_STR,  "com.apple.itunes.xid" },
 	{ "agac", DMAP_INT,  "daap.groupalbumcount" },
 	{ "agma", DMAP_INT,  "daap.groupmatchedqueryalbumcount" },
