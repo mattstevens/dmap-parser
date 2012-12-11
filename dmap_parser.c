@@ -198,6 +198,7 @@ static dmap_type dmap_types[] = {
 	{ "mctc", DMAP_INT,  "dmap.containercount" },
 	{ "mcti", DMAP_INT,  "dmap.containeritemid" },
 	{ "mcty", DMAP_INT,  "dmap.contentcodestype" },
+	{ "mdbk", DMAP_INT,  "dmap.databasekind" },
 	{ "mdcl", DMAP_DICT, "dmap.dictionary" },
 	{ "mdst", DMAP_INT,  "dmap.downloadstatus" },
 	{ "meds", DMAP_INT,  "dmap.editcommandssupported" },
