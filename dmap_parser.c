@@ -19,7 +19,7 @@ typedef struct {
 	const char *name;
 } dmap_type;
 
-static dmap_type dmap_types[] = {
+static const dmap_type dmap_types[] = {
 	{ "abal", DMAP_DICT, "daap.browsealbumlisting" },
 	{ "abar", DMAP_DICT, "daap.browseartistlisting" },
 	{ "abcp", DMAP_DICT, "daap.browsecomposerlisting" },
@@ -243,22 +243,22 @@ static dmap_type dmap_types[] = {
 	{ "muty", DMAP_INT,  "dmap.updatetype" },
 	{ "ppro", DMAP_VERS, "ppro" }
 };
-static size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
+static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
 static int dmap_type_sort(const void *c1, const void *c2) {
-	dmap_type *t1 = (dmap_type *)c1;
-	dmap_type *t2 = (dmap_type *)c2;
+	const dmap_type *t1 = c1;
+	const dmap_type *t2 = c2;
 	return strncmp(t1->code, t2->code, 4);
 }
 
-static dmap_type *dmap_type_from_code(const char *code) {
+static const dmap_type *dmap_type_from_code(const char *code) {
 	dmap_type key;
 	key.code = code;
 	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), dmap_type_sort);
 }
 
 const char *dmap_name_from_code(const char *code) {
-	dmap_type *t = dmap_type_from_code(code);
+	const dmap_type *t = dmap_type_from_code(code);
 	return t != 0 ? t->name : 0;
 }
 
@@ -300,7 +300,7 @@ static int dmap_is_codechar(const char c) {
 }
 
 int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
-	dmap_type *t;
+	const dmap_type *t;
 	DMAP_FIELD field_type;
 	size_t field_len;
 	const char *field_name;
