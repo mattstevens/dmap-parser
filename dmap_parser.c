@@ -6,6 +6,7 @@
 
 typedef enum {
 	DMAP_UNKNOWN,
+	DMAP_UINT,
 	DMAP_INT,
 	DMAP_STR,
 	DMAP_DATE,
@@ -24,223 +25,223 @@ static const dmap_type dmap_types[] = {
 	{ "abar", DMAP_DICT, "daap.browseartistlisting" },
 	{ "abcp", DMAP_DICT, "daap.browsecomposerlisting" },
 	{ "abgn", DMAP_DICT, "daap.browsegenrelisting" },
-	{ "abpl", DMAP_INT,  "daap.baseplaylist" },
+	{ "abpl", DMAP_UINT, "daap.baseplaylist" },
 	{ "abro", DMAP_DICT, "daap.databasebrowse" },
 	{ "adbs", DMAP_DICT, "daap.databasesongs" },
 	{ "aeAD", DMAP_DICT, "com.apple.itunes.adam-ids-array" },
-	{ "aeAI", DMAP_INT,  "com.apple.itunes.itms-artistid" },
-	{ "aeCF", DMAP_INT,  "com.apple.itunes.cloud-flavor-id" },
-	{ "aeCI", DMAP_INT,  "com.apple.itunes.itms-composerid" },
-	{ "aeCK", DMAP_INT,  "com.apple.itunes.cloud-library-kind" },
-	{ "aeCM", DMAP_INT,  "com.apple.itunes.cloud-status" },
+	{ "aeAI", DMAP_UINT, "com.apple.itunes.itms-artistid" },
+	{ "aeCF", DMAP_UINT, "com.apple.itunes.cloud-flavor-id" },
+	{ "aeCI", DMAP_UINT, "com.apple.itunes.itms-composerid" },
+	{ "aeCK", DMAP_UINT, "com.apple.itunes.cloud-library-kind" },
+	{ "aeCM", DMAP_UINT, "com.apple.itunes.cloud-status" },
 	{ "aeCR", DMAP_STR,  "com.apple.itunes.content-rating" } ,
-	{ "aeCS", DMAP_INT,  "com.apple.itunes.artworkchecksum" },
-	{ "aeCU", DMAP_INT,  "com.apple.itunes.cloud-user-id" },
-	{ "aeCd", DMAP_INT,  "com.apple.itunes.cloud-id" },
-	{ "aeDP", DMAP_INT,  "com.apple.itunes.drm-platform-id" },
-	{ "aeDR", DMAP_INT,  "com.apple.itunes.drm-user-id" },
-	{ "aeDV", DMAP_INT,  "com.apple.itunes.drm-versions" },
+	{ "aeCS", DMAP_UINT, "com.apple.itunes.artworkchecksum" },
+	{ "aeCU", DMAP_UINT, "com.apple.itunes.cloud-user-id" },
+	{ "aeCd", DMAP_UINT, "com.apple.itunes.cloud-id" },
+	{ "aeDP", DMAP_UINT, "com.apple.itunes.drm-platform-id" },
+	{ "aeDR", DMAP_UINT, "com.apple.itunes.drm-user-id" },
+	{ "aeDV", DMAP_UINT, "com.apple.itunes.drm-versions" },
 	{ "aeEN", DMAP_STR,  "com.apple.itunes.episode-num-str" },
-	{ "aeES", DMAP_INT,  "com.apple.itunes.episode-sort" },
-	{ "aeGD", DMAP_INT,  "com.apple.itunes.gapless-enc-dr" } ,
-	{ "aeGE", DMAP_INT,  "com.apple.itunes.gapless-enc-del" },
-	{ "aeGH", DMAP_INT,  "com.apple.itunes.gapless-heur" },
-	{ "aeGI", DMAP_INT,  "com.apple.itunes.itms-genreid" },
-	{ "aeGR", DMAP_INT,  "com.apple.itunes.gapless-resy" },
-	{ "aeGU", DMAP_INT,  "com.apple.itunes.gapless-dur" },
-	{ "aeGs", DMAP_INT,  "com.apple.itunes.can-be-genius-seed" },
-	{ "aeHD", DMAP_INT,  "com.apple.itunes.is-hd-video" },
-	{ "aeHV", DMAP_INT,  "com.apple.itunes.has-video" },
-	{ "aeK1", DMAP_INT,  "com.apple.itunes.drm-key1-id" },
-	{ "aeK2", DMAP_INT,  "com.apple.itunes.drm-key2-id" },
-	{ "aeMC", DMAP_INT,  "com.apple.itunes.playlist-contains-media-type-count" },
-	{ "aeMK", DMAP_INT,  "com.apple.itunes.mediakind" },
+	{ "aeES", DMAP_UINT, "com.apple.itunes.episode-sort" },
+	{ "aeGD", DMAP_UINT, "com.apple.itunes.gapless-enc-dr" } ,
+	{ "aeGE", DMAP_UINT, "com.apple.itunes.gapless-enc-del" },
+	{ "aeGH", DMAP_UINT, "com.apple.itunes.gapless-heur" },
+	{ "aeGI", DMAP_UINT, "com.apple.itunes.itms-genreid" },
+	{ "aeGR", DMAP_UINT, "com.apple.itunes.gapless-resy" },
+	{ "aeGU", DMAP_UINT, "com.apple.itunes.gapless-dur" },
+	{ "aeGs", DMAP_UINT, "com.apple.itunes.can-be-genius-seed" },
+	{ "aeHD", DMAP_UINT, "com.apple.itunes.is-hd-video" },
+	{ "aeHV", DMAP_UINT, "com.apple.itunes.has-video" },
+	{ "aeK1", DMAP_UINT, "com.apple.itunes.drm-key1-id" },
+	{ "aeK2", DMAP_UINT, "com.apple.itunes.drm-key2-id" },
+	{ "aeMC", DMAP_UINT, "com.apple.itunes.playlist-contains-media-type-count" },
+	{ "aeMK", DMAP_UINT, "com.apple.itunes.mediakind" },
 	{ "aeMX", DMAP_STR,  "com.apple.itunes.movie-info-xml" },
-	{ "aeMk", DMAP_INT,  "com.apple.itunes.extended-media-kind" },
-	{ "aeND", DMAP_INT,  "com.apple.itunes.non-drm-user-id" },
+	{ "aeMk", DMAP_UINT, "com.apple.itunes.extended-media-kind" },
+	{ "aeND", DMAP_UINT, "com.apple.itunes.non-drm-user-id" },
 	{ "aeNN", DMAP_STR,  "com.apple.itunes.network-name" },
-	{ "aeNV", DMAP_INT,  "com.apple.itunes.norm-volume" },
-	{ "aePC", DMAP_INT,  "com.apple.itunes.is-podcast" },
-	{ "aePI", DMAP_INT,  "com.apple.itunes.itms-playlistid" },
-	{ "aePP", DMAP_INT,  "com.apple.itunes.is-podcast-playlist" },
-	{ "aePS", DMAP_INT,  "com.apple.itunes.special-playlist" },
-	{ "aeRD", DMAP_INT,  "com.apple.itunes.rental-duration" },
-	{ "aeRP", DMAP_INT,  "com.apple.itunes.rental-pb-start" },
-	{ "aeRS", DMAP_INT,  "com.apple.itunes.rental-start" },
-	{ "aeRU", DMAP_INT,  "com.apple.itunes.rental-pb-duration" },
-	{ "aeSE", DMAP_INT,  "com.apple.itunes.store-pers-id" },
-	{ "aeSF", DMAP_INT,  "com.apple.itunes.itms-storefrontid" },
-	{ "aeSG", DMAP_INT,  "com.apple.itunes.saved-genius" },
-	{ "aeSI", DMAP_INT,  "com.apple.itunes.itms-songid" },
+	{ "aeNV", DMAP_UINT, "com.apple.itunes.norm-volume" },
+	{ "aePC", DMAP_UINT, "com.apple.itunes.is-podcast" },
+	{ "aePI", DMAP_UINT, "com.apple.itunes.itms-playlistid" },
+	{ "aePP", DMAP_UINT, "com.apple.itunes.is-podcast-playlist" },
+	{ "aePS", DMAP_UINT, "com.apple.itunes.special-playlist" },
+	{ "aeRD", DMAP_UINT, "com.apple.itunes.rental-duration" },
+	{ "aeRP", DMAP_UINT, "com.apple.itunes.rental-pb-start" },
+	{ "aeRS", DMAP_UINT, "com.apple.itunes.rental-start" },
+	{ "aeRU", DMAP_UINT, "com.apple.itunes.rental-pb-duration" },
+	{ "aeSE", DMAP_UINT, "com.apple.itunes.store-pers-id" },
+	{ "aeSF", DMAP_UINT, "com.apple.itunes.itms-storefrontid" },
+	{ "aeSG", DMAP_UINT, "com.apple.itunes.saved-genius" },
+	{ "aeSI", DMAP_UINT, "com.apple.itunes.itms-songid" },
 	{ "aeSN", DMAP_STR,  "com.apple.itunes.series-name" },
-	{ "aeSP", DMAP_INT,  "com.apple.itunes.smart-playlist" },
-	{ "aeSU", DMAP_INT,  "com.apple.itunes.season-num" },
+	{ "aeSP", DMAP_UINT, "com.apple.itunes.smart-playlist" },
+	{ "aeSU", DMAP_UINT, "com.apple.itunes.season-num" },
 	{ "aeSV", DMAP_VERS, "com.apple.itunes.music-sharing-version" },
 	{ "aeXD", DMAP_STR,  "com.apple.itunes.xid" },
-	{ "agac", DMAP_INT,  "daap.groupalbumcount" },
-	{ "agma", DMAP_INT,  "daap.groupmatchedqueryalbumcount" },
-	{ "agmi", DMAP_INT,  "daap.groupmatchedqueryitemcount" },
+	{ "agac", DMAP_UINT, "daap.groupalbumcount" },
+	{ "agma", DMAP_UINT, "daap.groupmatchedqueryalbumcount" },
+	{ "agmi", DMAP_UINT, "daap.groupmatchedqueryitemcount" },
 	{ "agrp", DMAP_STR,  "daap.songgrouping" },
 	{ "aply", DMAP_DICT, "daap.databaseplaylists" },
-	{ "aprm", DMAP_INT,  "daap.playlistrepeatmode" },
+	{ "aprm", DMAP_UINT, "daap.playlistrepeatmode" },
 	{ "apro", DMAP_VERS, "daap.protocolversion" },
-	{ "apsm", DMAP_INT,  "daap.playlistshufflemode" },
+	{ "apsm", DMAP_UINT, "daap.playlistshufflemode" },
 	{ "apso", DMAP_DICT, "daap.playlistsongs" },
 	{ "arif", DMAP_DICT, "daap.resolveinfo" },
 	{ "arsv", DMAP_DICT, "daap.resolve" },
 	{ "asaa", DMAP_STR,  "daap.songalbumartist" },
-	{ "asac", DMAP_INT,  "daap.songartworkcount" },
-	{ "asai", DMAP_INT,  "daap.songalbumid" },
+	{ "asac", DMAP_UINT, "daap.songartworkcount" },
+	{ "asai", DMAP_UINT, "daap.songalbumid" },
 	{ "asal", DMAP_STR,  "daap.songalbum" },
 	{ "asar", DMAP_STR,  "daap.songartist" },
-	{ "asas", DMAP_INT,  "daap.songalbumuserratingstatus" },
-	{ "asbk", DMAP_INT,  "daap.bookmarkable" },
-	{ "asbo", DMAP_INT,  "daap.songbookmark" },
-	{ "asbr", DMAP_INT,  "daap.songbitrate" },
-	{ "asbt", DMAP_INT,  "daap.songbeatsperminute" },
-	{ "ascd", DMAP_INT,  "daap.songcodectype" },
+	{ "asas", DMAP_UINT, "daap.songalbumuserratingstatus" },
+	{ "asbk", DMAP_UINT, "daap.bookmarkable" },
+	{ "asbo", DMAP_UINT, "daap.songbookmark" },
+	{ "asbr", DMAP_UINT, "daap.songbitrate" },
+	{ "asbt", DMAP_UINT, "daap.songbeatsperminute" },
+	{ "ascd", DMAP_UINT, "daap.songcodectype" },
 	{ "ascm", DMAP_STR,  "daap.songcomment" },
 	{ "ascn", DMAP_STR,  "daap.songcontentdescription" },
-	{ "asco", DMAP_INT,  "daap.songcompilation" },
+	{ "asco", DMAP_UINT, "daap.songcompilation" },
 	{ "ascp", DMAP_STR,  "daap.songcomposer" },
-	{ "ascr", DMAP_INT,  "daap.songcontentrating" },
-	{ "ascs", DMAP_INT,  "daap.songcodecsubtype" },
+	{ "ascr", DMAP_UINT, "daap.songcontentrating" },
+	{ "ascs", DMAP_UINT, "daap.songcodecsubtype" },
 	{ "asct", DMAP_STR,  "daap.songcategory" },
 	{ "asda", DMAP_DATE, "daap.songdateadded" },
-	{ "asdb", DMAP_INT,  "daap.songdisabled" },
-	{ "asdc", DMAP_INT,  "daap.songdisccount" },
-	{ "asdk", DMAP_INT,  "daap.songdatakind" },
+	{ "asdb", DMAP_UINT, "daap.songdisabled" },
+	{ "asdc", DMAP_UINT, "daap.songdisccount" },
+	{ "asdk", DMAP_UINT, "daap.songdatakind" },
 	{ "asdm", DMAP_DATE, "daap.songdatemodified" },
-	{ "asdn", DMAP_INT,  "daap.songdiscnumber" },
+	{ "asdn", DMAP_UINT, "daap.songdiscnumber" },
 	{ "asdp", DMAP_DATE, "daap.songdatepurchased" },
 	{ "asdr", DMAP_DATE, "daap.songdatereleased" },
 	{ "asdt", DMAP_STR,  "daap.songdescription" },
-	{ "ased", DMAP_INT,  "daap.songextradata" },
+	{ "ased", DMAP_UINT, "daap.songextradata" },
 	{ "aseq", DMAP_STR,  "daap.songeqpreset" },
-	{ "ases", DMAP_INT,  "daap.songexcludefromshuffle" },
+	{ "ases", DMAP_UINT, "daap.songexcludefromshuffle" },
 	{ "asfm", DMAP_STR,  "daap.songformat" },
 	{ "asgn", DMAP_STR,  "daap.songgenre" },
-	{ "asgp", DMAP_INT,  "daap.songgapless" },
-	{ "asgr", DMAP_INT,  "daap.supportsgroups" },
-	{ "ashp", DMAP_INT,  "daap.songhasbeenplayed" },
+	{ "asgp", DMAP_UINT, "daap.songgapless" },
+	{ "asgr", DMAP_UINT, "daap.supportsgroups" },
+	{ "ashp", DMAP_UINT, "daap.songhasbeenplayed" },
 	{ "askd", DMAP_DATE, "daap.songlastskipdate" },
-	{ "askp", DMAP_INT,  "daap.songuserskipcount" },
+	{ "askp", DMAP_UINT, "daap.songuserskipcount" },
 	{ "asky", DMAP_STR,  "daap.songkeywords" },
 	{ "aslc", DMAP_STR,  "daap.songlongcontentdescription" },
-	{ "aslr", DMAP_INT,  "daap.songalbumuserrating" },
-	{ "asls", DMAP_INT,  "daap.songlongsize" },
-	{ "aspc", DMAP_INT,  "daap.songuserplaycount" },
+	{ "aslr", DMAP_UINT, "daap.songalbumuserrating" },
+	{ "asls", DMAP_UINT, "daap.songlongsize" },
+	{ "aspc", DMAP_UINT, "daap.songuserplaycount" },
 	{ "aspl", DMAP_DATE, "daap.songdateplayed" },
 	{ "aspu", DMAP_STR,  "daap.songpodcasturl" },
-	{ "asri", DMAP_INT,  "daap.songartistid" },
-	{ "asrs", DMAP_INT,  "daap.songuserratingstatus" },
+	{ "asri", DMAP_UINT, "daap.songartistid" },
+	{ "asrs", DMAP_UINT, "daap.songuserratingstatus" },
 	{ "asrv", DMAP_INT,  "daap.songrelativevolume" },
 	{ "assa", DMAP_STR,  "daap.sortartist" },
 	{ "assc", DMAP_STR,  "daap.sortcomposer" },
 	{ "assl", DMAP_STR,  "daap.sortalbumartist" },
 	{ "assn", DMAP_STR,  "daap.sortname" },
-	{ "assp", DMAP_INT,  "daap.songstoptime" },
-	{ "assr", DMAP_INT,  "daap.songsamplerate" },
+	{ "assp", DMAP_UINT, "daap.songstoptime" },
+	{ "assr", DMAP_UINT, "daap.songsamplerate" },
 	{ "asss", DMAP_STR,  "daap.sortseriesname" },
-	{ "asst", DMAP_INT,  "daap.songstarttime" },
+	{ "asst", DMAP_UINT, "daap.songstarttime" },
 	{ "assu", DMAP_STR,  "daap.sortalbum" },
-	{ "assz", DMAP_INT,  "daap.songsize" },
-	{ "astc", DMAP_INT,  "daap.songtrackcount" },
-	{ "astm", DMAP_INT,  "daap.songtime" },
-	{ "astn", DMAP_INT,  "daap.songtracknumber" },
+	{ "assz", DMAP_UINT, "daap.songsize" },
+	{ "astc", DMAP_UINT, "daap.songtrackcount" },
+	{ "astm", DMAP_UINT, "daap.songtime" },
+	{ "astn", DMAP_UINT, "daap.songtracknumber" },
 	{ "asul", DMAP_STR,  "daap.songdataurl" },
-	{ "asur", DMAP_INT,  "daap.songuserrating" },
-	{ "asvc", DMAP_INT,  "daap.songprimaryvideocodec" },
-	{ "asyr", DMAP_INT,  "daap.songyear" },
-	{ "ated", DMAP_INT,  "daap.supportsextradata" },
+	{ "asur", DMAP_UINT, "daap.songuserrating" },
+	{ "asvc", DMAP_UINT, "daap.songprimaryvideocodec" },
+	{ "asyr", DMAP_UINT, "daap.songyear" },
+	{ "ated", DMAP_UINT, "daap.supportsextradata" },
 	{ "avdb", DMAP_DICT, "daap.serverdatabases" },
-	{ "caar", DMAP_INT,  "dacp.availablerepeatstates" }, /* some kind of ORed list? 1=disabled, 6=repeat all & repeat one enabled */
-	{ "caas", DMAP_INT,  "dacp.availableshufflestates" }, /* some kind of ORed list? 1=disabled, 2=enabled */
+	{ "caar", DMAP_UINT, "dacp.availablerepeatstates" },
+	{ "caas", DMAP_UINT, "dacp.availableshufflestates" },
 	{ "caci", DMAP_DICT, "caci" },
-	{ "cafe", DMAP_INT,  "dacp.fullscreenenabled" },
-	{ "cafs", DMAP_INT,  "dacp.fullscreen" },
-	{ "caia", DMAP_INT,  "dacp.isactive" },
+	{ "cafe", DMAP_UINT, "dacp.fullscreenenabled" },
+	{ "cafs", DMAP_UINT, "dacp.fullscreen" },
+	{ "caia", DMAP_UINT, "dacp.isactive" },
 	{ "cana", DMAP_STR,  "dacp.nowplayingartist" },
 	{ "cang", DMAP_STR,  "dacp.nowplayinggenre" },
 	{ "canl", DMAP_STR,  "dacp.nowplayingalbum" },
 	{ "cann", DMAP_STR,  "dacp.nowplayingname" },
-	{ "canp", DMAP_INT,  "dacp.nowplayingids" },
-	{ "cant", DMAP_INT,  "dacp.nowplayingtime" },
+	{ "canp", DMAP_UINT, "dacp.nowplayingids" },
+	{ "cant", DMAP_UINT, "dacp.nowplayingtime" },
 	{ "capr", DMAP_VERS, "dacp.protocolversion" },
-	{ "caps", DMAP_INT,  "dacp.playerstate" },
-	{ "carp", DMAP_INT,  "dacp.repeatstate" },
-	{ "cash", DMAP_INT,  "dacp.shufflestate" },
+	{ "caps", DMAP_UINT, "dacp.playerstate" },
+	{ "carp", DMAP_UINT, "dacp.repeatstate" },
+	{ "cash", DMAP_UINT, "dacp.shufflestate" },
 	{ "casp", DMAP_DICT, "dacp.speakers" },
-	{ "cast", DMAP_INT,  "dacp.songtime" },
-	{ "cavc", DMAP_INT,  "dacp.volumecontrollable" },
-	{ "cave", DMAP_INT,  "dacp.visualizerenabled" },
-	{ "cavs", DMAP_INT,  "dacp.visualizer" },
-	{ "ceJC", DMAP_INT,  "com.apple.itunes.jukebox-client-vote" },
-	{ "ceJI", DMAP_INT,  "com.apple.itunes.jukebox-current" },
-	{ "ceJS", DMAP_INT,  "com.apple.itunes.jukebox-score" },
-	{ "ceJV", DMAP_INT,  "com.apple.itunes.jukebox-vote" },
+	{ "cast", DMAP_UINT, "dacp.songtime" },
+	{ "cavc", DMAP_UINT, "dacp.volumecontrollable" },
+	{ "cave", DMAP_UINT, "dacp.visualizerenabled" },
+	{ "cavs", DMAP_UINT, "dacp.visualizer" },
+	{ "ceJC", DMAP_UINT, "com.apple.itunes.jukebox-client-vote" },
+	{ "ceJI", DMAP_UINT, "com.apple.itunes.jukebox-current" },
+	{ "ceJS", DMAP_UINT, "com.apple.itunes.jukebox-score" },
+	{ "ceJV", DMAP_UINT, "com.apple.itunes.jukebox-vote" },
 	{ "ceQR", DMAP_DICT, "com.apple.itunes.playqueue-contents-response" },
 	{ "ceQa", DMAP_STR,  "com.apple.itunes.playqueue-album" },
 	{ "ceQg", DMAP_STR,  "com.apple.itunes.playqueue-genre" },
 	{ "ceQn", DMAP_STR,  "com.apple.itunes.playqueue-name" },
 	{ "ceQr", DMAP_STR,  "com.apple.itunes.playqueue-artist" },
 	{ "cmgt", DMAP_DICT, "dmcp.getpropertyresponse" },
-	{ "cmmk", DMAP_INT,  "dmcp.mediakind" },
+	{ "cmmk", DMAP_UINT, "dmcp.mediakind" },
 	{ "cmpr", DMAP_VERS, "dmcp.protocolversion" },
-	{ "cmsr", DMAP_INT,  "dmcp.serverrevision" },
+	{ "cmsr", DMAP_UINT, "dmcp.serverrevision" },
 	{ "cmst", DMAP_DICT, "dmcp.playstatus" },
-	{ "cmvo", DMAP_INT,  "dmcp.volume" },
+	{ "cmvo", DMAP_UINT, "dmcp.volume" },
 	{ "mbcl", DMAP_DICT, "dmap.bag" },
 	{ "mccr", DMAP_DICT, "dmap.contentcodesresponse" },
 	{ "mcna", DMAP_STR,  "dmap.contentcodesname" },
-	{ "mcnm", DMAP_INT,  "dmap.contentcodesnumber" },
+	{ "mcnm", DMAP_UINT, "dmap.contentcodesnumber" },
 	{ "mcon", DMAP_DICT, "dmap.container" },
-	{ "mctc", DMAP_INT,  "dmap.containercount" },
-	{ "mcti", DMAP_INT,  "dmap.containeritemid" },
-	{ "mcty", DMAP_INT,  "dmap.contentcodestype" },
-	{ "mdbk", DMAP_INT,  "dmap.databasekind" },
+	{ "mctc", DMAP_UINT, "dmap.containercount" },
+	{ "mcti", DMAP_UINT, "dmap.containeritemid" },
+	{ "mcty", DMAP_UINT, "dmap.contentcodestype" },
+	{ "mdbk", DMAP_UINT, "dmap.databasekind" },
 	{ "mdcl", DMAP_DICT, "dmap.dictionary" },
-	{ "mdst", DMAP_INT,  "dmap.downloadstatus" },
-	{ "meds", DMAP_INT,  "dmap.editcommandssupported" },
-	{ "miid", DMAP_INT,  "dmap.itemid" },
-	{ "mikd", DMAP_INT,  "dmap.itemkind" },
-	{ "mimc", DMAP_INT,  "dmap.itemcount" },
+	{ "mdst", DMAP_UINT, "dmap.downloadstatus" },
+	{ "meds", DMAP_UINT, "dmap.editcommandssupported" },
+	{ "miid", DMAP_UINT, "dmap.itemid" },
+	{ "mikd", DMAP_UINT, "dmap.itemkind" },
+	{ "mimc", DMAP_UINT, "dmap.itemcount" },
 	{ "minm", DMAP_STR,  "dmap.itemname" },
 	{ "minm", DMAP_STR,  "dmap.itemname" },
 	{ "mlcl", DMAP_DICT, "dmap.listing" },
-	{ "mlid", DMAP_INT,  "dmap.sessionid" },
+	{ "mlid", DMAP_UINT, "dmap.sessionid" },
 	{ "mlit", DMAP_DICT, "dmap.listingitem" },
 	{ "mlog", DMAP_DICT, "dmap.loginresponse" },
-	{ "mpco", DMAP_INT,  "dmap.parentcontainerid" },
-	{ "mper", DMAP_INT,  "dmap.persistentid" },
+	{ "mpco", DMAP_UINT, "dmap.parentcontainerid" },
+	{ "mper", DMAP_UINT, "dmap.persistentid" },
 	{ "mpro", DMAP_VERS, "dmap.protocolversion" },
-	{ "mrco", DMAP_INT,  "dmap.returnedcount" },
-	{ "mrpr", DMAP_INT,  "dmap.remotepersistentid" },
-	{ "msal", DMAP_INT,  "dmap.supportsautologout" },
-	{ "msas", DMAP_INT,  "dmap.authenticationschemes" },
-	{ "msau", DMAP_INT,  "dmap.authenticationmethod" },
-	{ "msbr", DMAP_INT,  "dmap.supportsbrowse" },
-	{ "msdc", DMAP_INT,  "dmap.databasescount" },
-	{ "msex", DMAP_INT,  "dmap.supportsextensions" },
-	{ "msix", DMAP_INT,  "dmap.supportsindex" },
-	{ "mslr", DMAP_INT,  "dmap.loginrequired" },
-	{ "msma", DMAP_INT,  "dmap.machineaddress" },
+	{ "mrco", DMAP_UINT, "dmap.returnedcount" },
+	{ "mrpr", DMAP_UINT, "dmap.remotepersistentid" },
+	{ "msal", DMAP_UINT, "dmap.supportsautologout" },
+	{ "msas", DMAP_UINT, "dmap.authenticationschemes" },
+	{ "msau", DMAP_UINT, "dmap.authenticationmethod" },
+	{ "msbr", DMAP_UINT, "dmap.supportsbrowse" },
+	{ "msdc", DMAP_UINT, "dmap.databasescount" },
+	{ "msex", DMAP_UINT, "dmap.supportsextensions" },
+	{ "msix", DMAP_UINT, "dmap.supportsindex" },
+	{ "mslr", DMAP_UINT, "dmap.loginrequired" },
+	{ "msma", DMAP_UINT, "dmap.machineaddress" },
 	{ "msml", DMAP_DICT, "msml" },
-	{ "mspi", DMAP_INT,  "dmap.supportspersistentids" },
-	{ "msqy", DMAP_INT,  "dmap.supportsquery" },
-	{ "msrs", DMAP_INT,  "dmap.supportsresolve" },
+	{ "mspi", DMAP_UINT, "dmap.supportspersistentids" },
+	{ "msqy", DMAP_UINT, "dmap.supportsquery" },
+	{ "msrs", DMAP_UINT, "dmap.supportsresolve" },
 	{ "msrv", DMAP_DICT, "dmap.serverinforesponse" },
 	{ "mstc", DMAP_DATE, "dmap.utctime" },
-	{ "mstm", DMAP_INT,  "dmap.timeoutinterval" },
+	{ "mstm", DMAP_UINT, "dmap.timeoutinterval" },
 	{ "msto", DMAP_INT,  "dmap.utcoffset" },
 	{ "msts", DMAP_STR,  "dmap.statusstring" },
-	{ "mstt", DMAP_INT,  "dmap.status" },
-	{ "msup", DMAP_INT,  "dmap.supportsupdate" },
-	{ "mtco", DMAP_INT,  "dmap.specifiedtotalcount" },
+	{ "mstt", DMAP_UINT, "dmap.status" },
+	{ "msup", DMAP_UINT, "dmap.supportsupdate" },
+	{ "mtco", DMAP_UINT, "dmap.specifiedtotalcount" },
 	{ "mudl", DMAP_DICT, "dmap.deletedidlisting" },
 	{ "mupd", DMAP_DICT, "dmap.updateresponse" },
-	{ "musr", DMAP_INT,  "dmap.serverrevision" },
-	{ "muty", DMAP_INT,  "dmap.updatetype" },
+	{ "musr", DMAP_UINT, "dmap.serverrevision" },
+	{ "muty", DMAP_UINT, "dmap.updatetype" },
 	{ "ppro", DMAP_VERS, "ppro" }
 };
 static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
@@ -265,6 +266,12 @@ const char *dmap_name_from_code(const char *code) {
 static int16_t dmap_read_i16(const char *buf)
 {
 	return (int16_t)((buf[0] & 0xff) <<  8) |
+	((buf[1] & 0xff));
+}
+
+static uint16_t dmap_read_u16(const char *buf)
+{
+	return (uint16_t)((buf[0] & 0xff) <<  8) |
 	((buf[1] & 0xff));
 }
 
@@ -293,6 +300,18 @@ static int64_t dmap_read_i64(const char *buf)
 	((int64_t)(buf[5] & 0xff) << 16) |
 	((int64_t)(buf[6] & 0xff) <<  8) |
 	((int64_t)(buf[7] & 0xff));
+}
+
+static uint64_t dmap_read_u64(const char *buf)
+{
+	return ((uint64_t)(buf[0] & 0xff) << 56) |
+	((uint64_t)(buf[1] & 0xff) << 48) |
+	((uint64_t)(buf[2] & 0xff) << 40) |
+	((uint64_t)(buf[3] & 0xff) << 32) |
+	((uint64_t)(buf[4] & 0xff) << 24) |
+	((uint64_t)(buf[5] & 0xff) << 16) |
+	((uint64_t)(buf[6] & 0xff) <<  8) |
+	((uint64_t)(buf[7] & 0xff));
 }
 
 static int dmap_is_codechar(const char c) {
@@ -346,16 +365,39 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 					}
 				}
 
-				field_type = is_string ? DMAP_STR : DMAP_INT;
+				field_type = is_string ? DMAP_STR : DMAP_UINT;
 			}
 		}
 
 		switch (field_type) {
-			case DMAP_INT:
+			case DMAP_UINT:
 				/* Determine the integer's type based on its size */
 				switch (field_len) {
 					case 1:
-						/* TODO: Treat as char? */
+						if (settings->on_uint32)
+							settings->on_uint32(settings->ctx, code, field_name, *p);
+						break;
+					case 2:
+						if (settings->on_uint32)
+							settings->on_uint32(settings->ctx, code, field_name, dmap_read_u16(p));
+						break;
+					case 4:
+						if (settings->on_uint32)
+							settings->on_uint32(settings->ctx, code, field_name, dmap_read_u32(p));
+						break;
+					case 8:
+						if (settings->on_uint64)
+							settings->on_uint64(settings->ctx, code, field_name, dmap_read_u64(p));
+						break;
+					default:
+						if (settings->on_data)
+							settings->on_data(settings->ctx, code, field_name, p, field_len);
+						break;
+				}
+				break;
+			case DMAP_INT:
+				switch (field_len) {
+					case 1:
 						if (settings->on_int32)
 							settings->on_int32(settings->ctx, code, field_name, *p);
 						break;
@@ -384,12 +426,12 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 			case DMAP_DATE:
 				/* Seconds since epoch */
 				if (settings->on_date)
-					settings->on_date(settings->ctx, code, field_name, dmap_read_i32(p));
+					settings->on_date(settings->ctx, code, field_name, dmap_read_u32(p));
 				break;
 			case DMAP_VERS:
 				if (settings->on_string && field_len >= 4) {
 					char version[20];
-					sprintf(version, "%d.%d", dmap_read_i16(p), dmap_read_i16(p+2));
+					sprintf(version, "%d.%d", dmap_read_u16(p), dmap_read_u16(p+2));
 					settings->on_string(settings->ctx, code, field_name, version, strlen(version));
 				}
 				break;

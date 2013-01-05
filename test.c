@@ -132,7 +132,15 @@ void on_int64(void *ctx, const char *code, const char *name, int64_t value) {
 	append("%s: %lld", name, value);
 }
 
-void on_date(void *ctx, const char *code, const char *name, int32_t value) {
+void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
+	append("%s: %u", name, value);
+}
+
+void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
+	append("%s: %llu", name, value);
+}
+
+void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
 	append("date: %s (%s) %d\n", code, name, value);
 }
 
@@ -149,11 +157,13 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 }
 
 int main() {
-	dmap_settings settings = {0};
+	dmap_settings settings = {};
 	settings.on_dict_start = on_dict_start;
 	settings.on_dict_end = on_dict_end;
 	settings.on_int32 = on_int32;
 	settings.on_int64 = on_int64;
+	settings.on_uint32 = on_uint32;
+	settings.on_uint64 = on_uint64;
 	settings.on_date = on_date;
 	settings.on_string = on_string;
 	settings.on_data = on_data;
