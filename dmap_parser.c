@@ -246,16 +246,16 @@ static const dmap_type dmap_types[] = {
 };
 static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
-static int dmap_type_sort(const void *c1, const void *c2) {
-	const dmap_type *t1 = c1;
-	const dmap_type *t2 = c2;
-	return strncmp(t1->code, t2->code, 4);
+typedef int (*sort_func) (const void *, const void *);
+
+static int dmap_type_sort(const dmap_type *a, const dmap_type *b) {
+	return strncmp(a->code, b->code, 4);
 }
 
 static const dmap_type *dmap_type_from_code(const char *code) {
 	dmap_type key;
 	key.code = code;
-	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), dmap_type_sort);
+	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), (sort_func)dmap_type_sort);
 }
 
 const char *dmap_name_from_code(const char *code) {
@@ -263,20 +263,17 @@ const char *dmap_name_from_code(const char *code) {
 	return t != 0 ? t->name : 0;
 }
 
-static int16_t dmap_read_i16(const char *buf)
-{
+static int16_t dmap_read_i16(const char *buf) {
 	return (int16_t)((buf[0] & 0xff) <<  8) |
 	((buf[1] & 0xff));
 }
 
-static uint16_t dmap_read_u16(const char *buf)
-{
+static uint16_t dmap_read_u16(const char *buf) {
 	return (uint16_t)((buf[0] & 0xff) <<  8) |
 	((buf[1] & 0xff));
 }
 
-static int32_t dmap_read_i32(const char *buf)
-{
+static int32_t dmap_read_i32(const char *buf) {
 	return ((int32_t)(buf[0] & 0xff) << 24) |
 	((int32_t)(buf[1] & 0xff) << 16) |
 	((int32_t)(buf[2] & 0xff) <<  8) |
@@ -290,8 +287,7 @@ static uint32_t dmap_read_u32(const char *buf) {
 	((uint32_t)(buf[3] & 0xff));
 }
 
-static int64_t dmap_read_i64(const char *buf)
-{
+static int64_t dmap_read_i64(const char *buf) {
 	return ((int64_t)(buf[0] & 0xff) << 56) |
 	((int64_t)(buf[1] & 0xff) << 48) |
 	((int64_t)(buf[2] & 0xff) << 40) |
@@ -302,8 +298,7 @@ static int64_t dmap_read_i64(const char *buf)
 	((int64_t)(buf[7] & 0xff));
 }
 
-static uint64_t dmap_read_u64(const char *buf)
-{
+static uint64_t dmap_read_u64(const char *buf) {
 	return ((uint64_t)(buf[0] & 0xff) << 56) |
 	((uint64_t)(buf[1] & 0xff) << 48) |
 	((uint64_t)(buf[2] & 0xff) << 40) |

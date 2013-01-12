@@ -89,15 +89,15 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 int main(int argc, char* argv[]) {
 	dmap_settings settings = {
 		.on_dict_start = on_dict_start,
-		.on_dict_end = on_dict_end,
-		.on_int32 = on_int32,
-		.on_int64 = on_int64,
-		.on_uint32 = on_uint32,
-		.on_uint64 = on_uint64,
-		.on_date = on_date,
-		.on_string = on_string,
-		.on_data = on_data,
-		.ctx = 0
+		.on_dict_end   = on_dict_end,
+		.on_int32      = on_int32,
+		.on_int64      = on_int64,
+		.on_uint32     = on_uint32,
+		.on_uint64     = on_uint64,
+		.on_date       = on_date,
+		.on_string     = on_string,
+		.on_data       = on_data,
+		.ctx           = 0
 	};
 
 	char *buf = NULL;
