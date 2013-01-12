@@ -18,4 +18,15 @@ dmapprint
 
 The dmapprint utility accepts DMAP input from stdin or a file and outputs a human readable representation of the message. For example:
 
-	curl -H "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | dmapprint
+	> curl -s -H "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | dmapprint
+	dmap.contentcodesresponse:
+	  dmap.status: 200
+	  dmap.dictionary:
+	    dmap.contentcodesnumber: miid
+	    dmap.contentcodesname: dmap.itemid
+	    dmap.contentcodestype: 5
+	  dmap.dictionary:
+	    dmap.contentcodesnumber: minm
+	    dmap.contentcodesname: dmap.itemname
+	    dmap.contentcodestype: 9
+	    ...

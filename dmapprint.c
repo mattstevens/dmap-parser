@@ -52,6 +52,18 @@ void on_int64(void *ctx, const char *code, const char *name, int64_t value) {
 }
 
 void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
+	if (strcmp(code, "mcnm") == 0) {
+		char buf[5] = {
+			(value >> 24) & 0xff,
+			(value >> 16) & 0xff,
+			(value >>  8) & 0xff,
+			value & 0xff,
+			0
+		};
+		append("%s: %s", name, buf);
+		return;
+	}
+
 	append("%s: %u", name, value);
 }
 
