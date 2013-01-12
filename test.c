@@ -208,16 +208,23 @@ int main() {
 
 	size_t i;
 	size_t count = sizeof(tests) / sizeof(test);
-	printf("Running %zu tests\n", count);
+	size_t failcount = 0;
 	for (i = 0; i < count; i++) {
 		output[0] = '\0';
 		outpos = 0;
 		dmap_parse(&settings, tests[i].msg, tests[i].msglen);
 		if (strcmp(output, tests[i].expected) != 0) {
+			failcount++;
 			printf("Test failed! Expected:\n%sActual:\n%s\n",
 					tests[i].expected,
 					output);
 		}
 	}
+
+	printf("%zu tests passed", count - failcount);
+	if (failcount > 0)
+		printf(", %zu failed", failcount);
+	printf("\n");
+
 	return 0;
 }
