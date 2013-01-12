@@ -119,7 +119,7 @@ int main(int argc, char* argv[]) {
 
 		int fd = open(path, O_RDONLY);
 		if (fd == -1)
-			return errno;
+			return 1;
 
 		do {
 			result = read(fd, buf, size);
@@ -128,7 +128,7 @@ int main(int argc, char* argv[]) {
 		close(fd);
 
 		if (result == -1)
-			return errno;
+			return 1;
 	} else {
 		size_t bufIncrement = 60 * 1024;
 
