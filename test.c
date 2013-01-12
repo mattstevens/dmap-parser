@@ -195,16 +195,18 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 }
 
 int main() {
-	dmap_settings settings = {};
-	settings.on_dict_start = on_dict_start;
-	settings.on_dict_end = on_dict_end;
-	settings.on_int32 = on_int32;
-	settings.on_int64 = on_int64;
-	settings.on_uint32 = on_uint32;
-	settings.on_uint64 = on_uint64;
-	settings.on_date = on_date;
-	settings.on_string = on_string;
-	settings.on_data = on_data;
+	dmap_settings settings = {
+		.on_dict_start = on_dict_start,
+		.on_dict_end = on_dict_end,
+		.on_int32 = on_int32,
+		.on_int64 = on_int64,
+		.on_uint32 = on_uint32,
+		.on_uint64 = on_uint64,
+		.on_date = on_date,
+		.on_string = on_string,
+		.on_data = on_data,
+		.ctx = 0
+	};
 
 	size_t i;
 	size_t count = sizeof(tests) / sizeof(test);

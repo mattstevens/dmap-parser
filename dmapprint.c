@@ -76,8 +76,9 @@ void on_string(void *ctx, const char *code, const char *name, const char *buf, s
 }
 
 void on_data(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
+	size_t i;
 	printf("%s%s: ", prefix, name);
-	for (size_t i = 0; i < len; i++) {
+	for (i = 0; i < len; i++) {
 		putc(hexchars[buf[i] >> 4], stdout);
 		putc(hexchars[buf[i] & 0x0f], stdout);
 		putc(' ', stdout);
@@ -86,16 +87,18 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 }
 
 int main(int argc, char* argv[]) {
-	dmap_settings settings = {};
-	settings.on_dict_start = on_dict_start;
-	settings.on_dict_end = on_dict_end;
-	settings.on_int32 = on_int32;
-	settings.on_int64 = on_int64;
-	settings.on_uint32 = on_uint32;
-	settings.on_uint64 = on_uint64;
-	settings.on_date = on_date;
-	settings.on_string = on_string;
-	settings.on_data = on_data;
+	dmap_settings settings = {
+		.on_dict_start = on_dict_start,
+		.on_dict_end = on_dict_end,
+		.on_int32 = on_int32,
+		.on_int64 = on_int64,
+		.on_uint32 = on_uint32,
+		.on_uint64 = on_uint64,
+		.on_date = on_date,
+		.on_string = on_string,
+		.on_data = on_data,
+		.ctx = 0
+	};
 
 	char *buf = NULL;
 	size_t size = 0;
@@ -109,7 +112,7 @@ int main(int argc, char* argv[]) {
 
 		const char *path = argv[1];
 
-		struct stat s = {};
+		struct stat s;
 		if (stat(path, &s) != 0) {
 			return 1;
 		}
