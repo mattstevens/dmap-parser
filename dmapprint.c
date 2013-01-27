@@ -118,7 +118,9 @@ int main(int argc, char* argv[]) {
 
 	if (argc >= 2) {
 		if (strcmp(argv[1], "--help") == 0) {
-			printf("Usage: dmapprint [file]\n");
+			printf("Usage: dmapprint [file]\n\n"
+			"Accepts Digital Media Access Protocol input from a file or "
+			"standard input and\nprints it in a human-readable format.\n");
 			return 0;
 		}
 
