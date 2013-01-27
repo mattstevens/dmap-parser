@@ -8,6 +8,8 @@
 
 char output[2048] = {0};
 size_t outpos = 0;
+char prefix[64] = {0};
+static const char hexchars[] = "0123456789ABCDEF";
 
 typedef struct {
 	const char *name;
@@ -84,6 +86,15 @@ static const test tests[] = {
 	.msglen = 16,
 	.expected = \
 	"dmap.utcoffset: -6630771356447347235\n"
+},
+{
+	.name = "Unmapped integer as data",
+	.msg = {
+	0x6D, 0x70, 0x65, 0x72, 0x00, 0x00, 0x00, 0x10, 0x00, 0x01, 0x02, 0x03,
+	0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x0C, 0x0D, 0x0E, 0x0F },
+	.msglen = 24,
+	.expected = \
+	"dmap.persistentid: <00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F>\n"
 },
 
 /* Unknown types */
@@ -316,8 +327,6 @@ static const test tests[] = {
 }
 };
 
-char prefix[64] = {0};
-
 void indent() {
 	strcat(prefix, "  ");
 }
@@ -384,7 +393,18 @@ void on_string(void *ctx, const char *code, const char *name, const char *buf, s
 }
 
 void on_data(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
-	append("data: %s (%s)\n", code, name);
+	char *str = malloc((len * 3) + 1);
+	size_t i;
+	char *p = str;
+	for (i = 0; i < len; i++) {
+		if (i > 0)
+			*p++ = ' ';
+
+		*p++ = hexchars[buf[i] >> 4];
+		*p++ = hexchars[buf[i] & 0x0f];
+	}
+	append("%s: <%s>", name, str);
+	free(str);
 }
 
 int main() {
