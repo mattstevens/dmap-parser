@@ -438,5 +438,5 @@ int main() {
 		printf(", %d failed", failcount);
 	printf("\n");
 
-	return 0;
+	return failcount ? 1 : 0;
 }
