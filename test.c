@@ -403,6 +403,7 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 		*p++ = hexchars[buf[i] >> 4];
 		*p++ = hexchars[buf[i] & 0x0f];
 	}
+	*p = '\0';
 	append("%s: <%s>", name, str);
 	free(str);
 }
