@@ -429,7 +429,8 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 			case DMAP_DICT:
 				if (settings->on_dict_start)
 					settings->on_dict_start(settings->ctx, code, field_name);
-				dmap_parse(settings, p, field_len);
+				if (dmap_parse(settings, p, field_len) != 0)
+					return -1;
 				if (settings->on_dict_end)
 					settings->on_dict_end(settings->ctx, code, field_name);
 				break;
@@ -439,6 +440,9 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 
 		p += field_len;
 	}
+
+	if (p != end)
+		return -1;
 
 	return 0;
 }
