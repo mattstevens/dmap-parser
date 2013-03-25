@@ -263,21 +263,12 @@ const char *dmap_name_from_code(const char *code) {
 	return t != 0 ? t->name : 0;
 }
 
-static int16_t dmap_read_i16(const char *buf) {
-	return (int16_t)((buf[0] & 0xff) <<  8) |
-	((buf[1] & 0xff));
-}
-
 static uint16_t dmap_read_u16(const char *buf) {
-	return (uint16_t)((buf[0] & 0xff) <<  8) |
-	((buf[1] & 0xff));
+	return ((uint16_t)(buf[0] & 0xff) << 8) | (buf[1] & 0xff);
 }
 
-static int32_t dmap_read_i32(const char *buf) {
-	return ((int32_t)(buf[0] & 0xff) << 24) |
-	((int32_t)(buf[1] & 0xff) << 16) |
-	((int32_t)(buf[2] & 0xff) <<  8) |
-	((int32_t)(buf[3] & 0xff));
+static int16_t dmap_read_i16(const char *buf) {
+	return (int16_t)dmap_read_u16(buf);
 }
 
 static uint32_t dmap_read_u32(const char *buf) {
@@ -287,15 +278,8 @@ static uint32_t dmap_read_u32(const char *buf) {
 	((uint32_t)(buf[3] & 0xff));
 }
 
-static int64_t dmap_read_i64(const char *buf) {
-	return ((int64_t)(buf[0] & 0xff) << 56) |
-	((int64_t)(buf[1] & 0xff) << 48) |
-	((int64_t)(buf[2] & 0xff) << 40) |
-	((int64_t)(buf[3] & 0xff) << 32) |
-	((int64_t)(buf[4] & 0xff) << 24) |
-	((int64_t)(buf[5] & 0xff) << 16) |
-	((int64_t)(buf[6] & 0xff) <<  8) |
-	((int64_t)(buf[7] & 0xff));
+static int32_t dmap_read_i32(const char *buf) {
+	return (int32_t)dmap_read_u32(buf);
 }
 
 static uint64_t dmap_read_u64(const char *buf) {
@@ -307,6 +291,10 @@ static uint64_t dmap_read_u64(const char *buf) {
 	((uint64_t)(buf[5] & 0xff) << 16) |
 	((uint64_t)(buf[6] & 0xff) <<  8) |
 	((uint64_t)(buf[7] & 0xff));
+}
+
+static int64_t dmap_read_i64(const char *buf) {
+	return (int64_t)dmap_read_u64(buf);
 }
 
 int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
