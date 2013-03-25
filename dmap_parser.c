@@ -260,7 +260,7 @@ static const dmap_type *dmap_type_from_code(const char *code) {
 
 const char *dmap_name_from_code(const char *code) {
 	const dmap_type *t = dmap_type_from_code(code);
-	return t != 0 ? t->name : 0;
+	return t != NULL ? t->name : NULL;
 }
 
 static uint16_t dmap_read_u16(const char *buf) {
