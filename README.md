@@ -1,7 +1,13 @@
 DMAP Parser
 ===========
 
-A parser in C for the Digital Media Access Protocol (DMAP) and Digital Media Control Protocol (DMCP) used by iTunes. These are also referred to as the Digital Audio Access Protocol (DAAP) and Digital Audio Control Protocol (DACP).
+A parser in C for the Digital Media Access Protocol and its derivatives as used by iTunes and iPhoto. This includes support for the following protocols:
+
+* Digital Media Access Protocol (DMAP)
+	* Digital Audio Access Protocol (DAAP)
+	* Digital Photo Access Protocol (DPAP)
+* Digital Media Control Protocol (DMCP)
+	* Digital Audio Control Protocol (DACP)
 
 Usage
 -----
@@ -18,7 +24,7 @@ dmapprint
 
 The dmapprint utility accepts DMAP input from stdin or a file and outputs a human readable representation of the message. For example:
 
-	> curl -s -H "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | dmapprint
+	> curl --silent --header "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | dmapprint
 	dmap.contentcodesresponse:
 	  dmap.status: 200
 	  dmap.dictionary:
