@@ -21,6 +21,51 @@ struct contentcode {
 
 static struct contentcode current_type = {};
 
+enum CODE_TYPE {
+	UINT8 = 1,
+	INT8 = 2,
+	UINT16 = 3,
+	INT16 = 4,
+	UINT32 = 5,
+	INT32 = 6,
+	UINT64 = 7,
+	INT64 = 8,
+	STRING = 9,
+	DATE = 10,
+	VERSION = 11,
+	LIST = 12
+};
+
+static const char *dmap_type_for_type(uint32_t type) {
+	switch ((enum CODE_TYPE)type) {
+		case UINT8:
+		case UINT16:
+		case UINT32:
+		case UINT64:
+			return "DMAP_UINT,";
+
+		case INT8:
+		case INT16:
+		case INT32:
+		case INT64:
+			return "DMAP_INT, ";
+
+		case STRING:
+			return "DMAP_STR, ";
+
+		case DATE:
+			return "DMAP_DATE,";
+
+		case VERSION:
+			return "DMAP_VERS,";
+
+		case LIST:
+			return "DMAP_DICT,";
+	}
+
+	return "UNKNOWN,";
+}
+
 void on_dict_start(void *ctx, const char *code, const char *name) {
 	if (in_response) {
 		in_type = 1;
@@ -38,13 +83,13 @@ void on_dict_end(void *ctx, const char *code, const char *name) {
 			const char *state = NULL;
 			const char *current_name = dmap_name_from_code(current_type.code);
 			if (!current_name) {
-				state = "NEW";
+				state = "NEW    ";
 			} else if (strcmp(current_type.name, current_name) != 0) {
 				state = "UPDATED";
 			}
 
 			if (state) {
-				printf("%s: %s: %s (%u)\n", state, current_type.code, current_type.name, current_type.type);
+				printf("%s { \"%s\", %s \"%s\" },\n", state, current_type.code, dmap_type_for_type(current_type.type), current_type.name);
 			}
 		}
 		memset(&current_type, 0, sizeof(current_type));
