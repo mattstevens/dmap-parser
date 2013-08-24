@@ -191,6 +191,8 @@ static const dmap_type dmap_types[] = {
 	{ "cmsr", DMAP_UINT, "dmcp.serverrevision" },
 	{ "cmst", DMAP_DICT, "dmcp.playstatus" },
 	{ "cmvo", DMAP_UINT, "dmcp.volume" },
+	{ "ipsa", DMAP_DICT, "dpap.iphotoslideshowadvancedoptions" },
+	{ "ipsl", DMAP_DICT, "dpap.iphotoslideshowoptions" },
 	{ "mbcl", DMAP_DICT, "dmap.bag" },
 	{ "mccr", DMAP_DICT, "dmap.contentcodesresponse" },
 	{ "mcna", DMAP_STR,  "dmap.contentcodesname" },
@@ -242,7 +244,20 @@ static const dmap_type dmap_types[] = {
 	{ "mupd", DMAP_DICT, "dmap.updateresponse" },
 	{ "musr", DMAP_UINT, "dmap.serverrevision" },
 	{ "muty", DMAP_UINT, "dmap.updatetype" },
-	{ "ppro", DMAP_VERS, "ppro" }
+	{ "pasp", DMAP_STR,  "dpap.aspectratio" },
+	{ "pcmt", DMAP_STR,  "dpap.imagecomments" },
+	{ "pfai", DMAP_DICT, "dpap.failureids" },
+	{ "pfdt", DMAP_DICT, "dpap.filedata" },
+	{ "pfmt", DMAP_STR,  "dpap.imageformat" },
+	{ "phgt", DMAP_UINT, "dpap.imagepixelheight" },
+	{ "picd", DMAP_DATE, "dpap.creationdate" },
+	{ "pifs", DMAP_UINT, "dpap.imagefilesize" },
+	{ "pimf", DMAP_STR,  "dpap.imagefilename" },
+	{ "plsz", DMAP_UINT, "dpap.imagelargefilesize" },
+	{ "ppro", DMAP_VERS, "dpap.protocolversion" },
+	{ "prat", DMAP_UINT, "dpap.imagerating" },
+	{ "pret", DMAP_DICT, "dpap.retryids" },
+	{ "pwth", DMAP_UINT, "dpap.imagepixelwidth" }
 };
 static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
