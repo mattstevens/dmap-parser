@@ -209,7 +209,6 @@ static const dmap_type dmap_types[] = {
 	{ "mikd", DMAP_UINT, "dmap.itemkind" },
 	{ "mimc", DMAP_UINT, "dmap.itemcount" },
 	{ "minm", DMAP_STR,  "dmap.itemname" },
-	{ "minm", DMAP_STR,  "dmap.itemname" },
 	{ "mlcl", DMAP_DICT, "dmap.listing" },
 	{ "mlid", DMAP_UINT, "dmap.sessionid" },
 	{ "mlit", DMAP_DICT, "dmap.listingitem" },
