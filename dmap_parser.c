@@ -80,6 +80,8 @@ static const dmap_type dmap_types[] = {
 	{ "aeSU", DMAP_UINT, "com.apple.itunes.season-num" },
 	{ "aeSV", DMAP_VERS, "com.apple.itunes.music-sharing-version" },
 	{ "aeXD", DMAP_STR,  "com.apple.itunes.xid" },
+	{ "aemi", DMAP_DICT, "com.apple.itunes.media-kind-listing-item" },
+	{ "aeml", DMAP_DICT, "com.apple.itunes.media-kind-listing" },
 	{ "agac", DMAP_UINT, "daap.groupalbumcount" },
 	{ "agma", DMAP_UINT, "daap.groupmatchedqueryalbumcount" },
 	{ "agmi", DMAP_UINT, "daap.groupmatchedqueryitemcount" },
