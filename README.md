@@ -36,3 +36,14 @@ The dmapprint utility accepts DMAP input from stdin or a file and outputs a huma
 	    dmap.contentcodesname: dmap.itemname
 	    dmap.contentcodestype: 9
 	    ...
+
+This utility can be built by running `make dmapprint`.
+
+Content Code Sources
+--------------------
+
+1. The /content-codes endpoints exposed by iTunes and iPhoto (see the dmapprint example above). The makefile includes a `checkcodes` target that parses the output of these endpoints and checks for new or updated codes.
+
+2. Examination of network traffic between iTunes libraries and between iTunes and the Remote app. The /databases and /ctrl-int/1/getproperty endpoints are used to request specific properties by name and the results are returned using their fourchar equivalents. These mappings can be confirmed by requesting specific properties in isolation.
+
+3. Output of `strings` on the iTunes binary. Since content code names use consistent prefixing this provides a good idea of the set of names that iTunes contains mappings for. These names can be mapped by querying them through the databases or getproperty endpoints. In a few cases these names are manually mapped where the name and fourchar follow a pattern in confirmed codes and the context in which they are used provides a high level of confidence in the mapping.
