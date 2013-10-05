@@ -84,6 +84,12 @@ static const test tests[] = {
 	24,
 	"dmap.persistentid: <00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f>\n"
 },
+{
+	"Data",
+	{ 0x61, 0x65, 0x43, 0x44, 0x00, 0x00, 0x00, 0x04, 0x00, 0x01, 0x02, 0x03 },
+	12,
+	"com.apple.itunes.flat-chapter-data: <00 01 02 03>\n"
+},
 
 /* Unknown types */
 {

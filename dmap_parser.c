@@ -9,6 +9,7 @@ typedef enum {
 	DMAP_UINT,
 	DMAP_INT,
 	DMAP_STR,
+	DMAP_DATA,
 	DMAP_DATE,
 	DMAP_VERS,
 	DMAP_DICT
@@ -30,7 +31,7 @@ static const dmap_type dmap_types[] = {
 	{ "adbs", DMAP_DICT, "daap.databasesongs" },
 	{ "aeAD", DMAP_DICT, "com.apple.itunes.adam-ids-array" },
 	{ "aeAI", DMAP_UINT, "com.apple.itunes.itms-artistid" },
-	{ "aeCD", DMAP_UINT, "com.apple.itunes.flat-chapter-data" },
+	{ "aeCD", DMAP_DATA, "com.apple.itunes.flat-chapter-data" },
 	{ "aeCF", DMAP_UINT, "com.apple.itunes.cloud-flavor-id" },
 	{ "aeCI", DMAP_UINT, "com.apple.itunes.itms-composerid" },
 	{ "aeCK", DMAP_UINT, "com.apple.itunes.cloud-library-kind" },
@@ -424,6 +425,10 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 			case DMAP_STR:
 				if (settings->on_string)
 					settings->on_string(settings->ctx, code, field_name, p, field_len);
+				break;
+			case DMAP_DATA:
+				if (settings->on_data)
+					settings->on_data(settings->ctx, code, field_name, p, field_len);
 				break;
 			case DMAP_DATE:
 				/* Seconds since epoch */
