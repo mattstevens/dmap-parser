@@ -122,6 +122,9 @@ int main(int argc, char* argv[]) {
 			"Accepts Digital Media Access Protocol input from a file or "
 			"standard input and\nprints it in a human-readable format.\n");
 			return 0;
+		} else if (strcmp(argv[1], "--version") == 0) {
+			printf("dmapprint %s\n", dmap_version_string());
+			return 0;
 		}
 
 		const char *path = argv[1];
