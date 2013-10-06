@@ -5,6 +5,7 @@
 #include <stdarg.h>
 #include <time.h>
 #include <fcntl.h>
+#include <assert.h>
 
 char output[2048] = {0};
 size_t outpos = 0;
@@ -414,6 +415,16 @@ int main() {
 	int count = sizeof(tests) / sizeof(test);
 	int failcount = 0;
 	int result;
+
+	assert(dmap_version() > 1000000);
+	assert(strlen(dmap_version_string()) > 0);
+
+	assert(dmap_name_from_code(NULL) == NULL);
+	assert(dmap_name_from_code("") == NULL);
+	assert(strcmp(dmap_name_from_code("minm"), "dmap.itemname") == 0);
+
+	assert(dmap_parse(NULL, NULL, 0) == -1);
+	assert(dmap_parse(&settings, NULL, 0) == -1);
 
 	for (i = 0; i < count; i++) {
 		output[0] = '\0';
