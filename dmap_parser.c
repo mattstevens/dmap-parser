@@ -296,8 +296,12 @@ static const dmap_type *dmap_type_from_code(const char *code) {
 }
 
 const char *dmap_name_from_code(const char *code) {
-	const dmap_type *t = dmap_type_from_code(code);
-	return t != NULL ? t->name : NULL;
+	const dmap_type *type;
+	if (!code)
+		return NULL;
+
+	type = dmap_type_from_code(code);
+	return type ? type->name : NULL;
 }
 
 static uint16_t dmap_read_u16(const char *buf) {
@@ -343,6 +347,9 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 	const char *end = buf + len;
 	char code[5];
 	code[4] = '\0';
+
+	if (!settings || !buf)
+		return -1;
 
 	while (end - p >= 8) {
 		strncpy(code, p, 4);
