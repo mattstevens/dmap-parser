@@ -4,6 +4,9 @@
 #include <string.h>
 #include <ctype.h>
 
+#define DMAP_STRINGIFY(x) DMAP_STRINGIFY_(x)
+#define DMAP_STRINGIFY_(x) #x
+
 typedef enum {
 	DMAP_UNKNOWN,
 	DMAP_UINT,
@@ -271,6 +274,16 @@ static const dmap_type dmap_types[] = {
 static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
 
 typedef int (*sort_func) (const void *, const void *);
+
+int dmap_version() {
+	return DMAP_VERSION;
+}
+
+const char *dmap_version_string() {
+	return DMAP_STRINGIFY(DMAP_VERSION_MAJOR) "." \
+	       DMAP_STRINGIFY(DMAP_VERSION_MINOR) "." \
+	       DMAP_STRINGIFY(DMAP_VERSION_PATCH);
+}
 
 static int dmap_type_sort(const dmap_type *a, const dmap_type *b) {
 	return strncmp(a->code, b->code, 4);

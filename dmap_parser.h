@@ -7,6 +7,14 @@ extern "C" {
 #include <stdint.h>
 #include <sys/types.h>
 
+#define DMAP_VERSION_MAJOR 1
+#define DMAP_VERSION_MINOR 1
+#define DMAP_VERSION_PATCH 0
+
+#define DMAP_VERSION (DMAP_VERSION_MAJOR * 1000000 + \
+                      DMAP_VERSION_MINOR * 1000 + \
+                      DMAP_VERSION_PATCH)
+
 typedef void (*dmap_dict_cb)   (void *ctx, const char *code, const char *name);
 typedef void (*dmap_int32_cb)  (void *ctx, const char *code, const char *name, int32_t value);
 typedef void (*dmap_int64_cb)  (void *ctx, const char *code, const char *name, int64_t value);
@@ -26,6 +34,19 @@ typedef struct {
 	dmap_data_cb   on_data;
 	void *ctx;
 } dmap_settings;
+
+/**
+ * Returns the library version number.
+ *
+ * The version number format is (major * 1000000) + (minor * 1000) + patch.
+ * For example, the value for version 1.2.3 is 1002003.
+ */
+int dmap_version();
+
+/**
+ * Returns the library version as a string.
+ */
+const char *dmap_version_string();
 
 const char *dmap_name_from_code(const char *code);
 int dmap_parse(const dmap_settings *settings, const char *buf, size_t len);
