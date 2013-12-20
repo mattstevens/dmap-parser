@@ -66,7 +66,7 @@ static const char *dmap_type_for_type(uint32_t type) {
 	return "UNKNOWN,";
 }
 
-void on_dict_start(void *ctx, const char *code, const char *name) {
+static void on_dict_start(void *ctx, const char *code, const char *name) {
 	if (in_response) {
 		in_type = 1;
 	} else {
@@ -76,7 +76,7 @@ void on_dict_start(void *ctx, const char *code, const char *name) {
 	}
 }
 
-void on_dict_end(void *ctx, const char *code, const char *name) {
+static void on_dict_end(void *ctx, const char *code, const char *name) {
 	if (in_type) {
 		in_type = 0;
 		if (current_type.code[0] && current_type.name[0]) {
@@ -98,7 +98,7 @@ void on_dict_end(void *ctx, const char *code, const char *name) {
 	}
 }
 
-void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
+static void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
 	if (strcmp(code, "mcnm") == 0) {
 		current_type.code[0] = (value >> 24) & 0xff;
 		current_type.code[1] = (value >> 16) & 0xff;
@@ -110,7 +110,7 @@ void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
 	}
 }
 
-void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
+static void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
 	if (strcmp(code, "mcna") == 0) {
 		strncpy(current_type.name, buf, len);
 	}
@@ -129,45 +129,13 @@ int main(int argc, char* argv[]) {
 	size_t size = 0;
 	ssize_t result = 0;
 
-	if (argc >= 2) {
-		if (strcmp(argv[1], "--help") == 0) {
-			printf("Usage: dmapprint [file]\n\n"
-			"Accepts Digital Media Access Protocol input from a file or "
-			"standard input and\nprints it in a human-readable format.\n");
-			return 0;
-		}
+	size_t bufIncrement = 60 * 1024;
 
-		const char *path = argv[1];
-
-		struct stat s;
-		if (stat(path, &s) != 0) {
-			return 1;
-		}
-
-		size = s.st_size;
-		buf = malloc(size);
-
-		int fd = open(path, O_RDONLY);
-		if (fd == -1)
-			return 1;
-
-		do {
-			result = read(fd, buf, size);
-		} while (result == -1 && errno == EINTR);
-
-		close(fd);
-
-		if (result == -1)
-			return 1;
-	} else {
-		size_t bufIncrement = 60 * 1024;
-
-		do {
-			size += result;
-			buf = realloc(buf, size + bufIncrement);
-			result = read(fileno(stdin), &buf[size], bufIncrement);
-		} while (result > 0);
-	}
+	do {
+		size += result;
+		buf = realloc(buf, size + bufIncrement);
+		result = read(fileno(stdin), &buf[size], bufIncrement);
+	} while (result > 0);
 
 	dmap_parse(&settings, buf, size);
 

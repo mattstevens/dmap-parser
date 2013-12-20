@@ -6,9 +6,9 @@ test: testapp
 
 checkcodes: checkapp
 	@echo "iTunes: "
-	curl --silent --header "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | ./checkapp | sort
+	curl --silent --header "Viewer-Only-Client: 1" http://127.0.0.1:3689/content-codes | ./checkapp | LC_ALL=C sort
 	@echo "\niPhoto (note: remaps containers): "
-	curl --silent --header "Viewer-Only-Client: 1" http://127.0.0.1:8770/content-codes | ./checkapp | sort
+	curl --silent --header "Viewer-Only-Client: 1" http://127.0.0.1:8770/content-codes | ./checkapp | LC_ALL=C sort
 
 dmap_parser.o: dmap_parser.c dmap_parser.h Makefile
 	$(CC) $(CFLAGS) -c dmap_parser.c -o $@
