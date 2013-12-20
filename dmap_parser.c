@@ -280,8 +280,8 @@ int dmap_version() {
 }
 
 const char *dmap_version_string() {
-	return DMAP_STRINGIFY(DMAP_VERSION_MAJOR) "." \
-	       DMAP_STRINGIFY(DMAP_VERSION_MINOR) "." \
+	return DMAP_STRINGIFY(DMAP_VERSION_MAJOR) "."
+	       DMAP_STRINGIFY(DMAP_VERSION_MINOR) "."
 	       DMAP_STRINGIFY(DMAP_VERSION_PATCH);
 }
 
