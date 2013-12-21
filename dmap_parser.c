@@ -345,14 +345,13 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 	const char *field_name;
 	const char *p = buf;
 	const char *end = buf + len;
-	char code[5];
-	code[4] = '\0';
+	char code[5] = {0};
 
 	if (!settings || !buf)
 		return -1;
 
 	while (end - p >= 8) {
-		strncpy(code, p, 4);
+		memcpy(code, p, 4);
 		field = dmap_field_from_code(code);
 		p += 4;
 
