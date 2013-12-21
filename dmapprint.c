@@ -23,7 +23,7 @@ void outdent() {
 	}
 }
 
-void append(const char* line, ...) {
+void append(const char *line, ...) {
 	va_list args;
 	va_start(args, line);
 
@@ -74,7 +74,7 @@ void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
 void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
 	char buf[32];
 	time_t timeval = value;
-	struct tm* timestruct = gmtime(&timeval);
+	struct tm *timestruct = gmtime(&timeval);
 	strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S +0000", timestruct);
 	append("%s: %s", name, buf);
 }
@@ -98,7 +98,7 @@ void on_data(void *ctx, const char *code, const char *name, const char *buf, siz
 	printf("\n");
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 	dmap_settings settings = {
 		.on_dict_start = on_dict_start,
 		.on_dict_end   = on_dict_end,

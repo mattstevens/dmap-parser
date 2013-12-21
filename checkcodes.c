@@ -116,7 +116,7 @@ static void on_string(void *ctx, const char *code, const char *name, const char 
 	}
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
 	dmap_settings settings = {
 		.on_dict_start = on_dict_start,
 		.on_dict_end   = on_dict_end,

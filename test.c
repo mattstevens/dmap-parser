@@ -16,7 +16,7 @@ typedef struct {
 	const char *name;
 	const char msg[1024];
 	size_t msglen;
-	const char* expected;
+	const char *expected;
 } test;
 
 static const test tests[] = {
@@ -327,7 +327,7 @@ void outdent() {
 	}
 }
 
-void append(const char* line, ...) {
+void append(const char *line, ...) {
 	va_list args;
 	va_start(args, line);
 
@@ -368,7 +368,7 @@ void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
 void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
 	char buf[32];
 	time_t timeval = value;
-	struct tm* timestruct = gmtime(&timeval);
+	struct tm *timestruct = gmtime(&timeval);
 	strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S +0000", timestruct);
 	append("%s: %s", name, buf);
 }
