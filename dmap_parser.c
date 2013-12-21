@@ -16,15 +16,15 @@ typedef enum {
 	DMAP_DATE,
 	DMAP_VERS,
 	DMAP_DICT
-} DMAP_FIELD;
+} DMAP_TYPE;
 
 typedef struct {
 	const char *code;
-	DMAP_FIELD type;
+	DMAP_TYPE type;
 	const char *name;
-} dmap_type;
+} dmap_field;
 
-static const dmap_type dmap_types[] = {
+static const dmap_field dmap_fields[] = {
 	{ "abal", DMAP_DICT, "daap.browsealbumlisting" },
 	{ "abar", DMAP_DICT, "daap.browseartistlisting" },
 	{ "abcp", DMAP_DICT, "daap.browsecomposerlisting" },
@@ -271,7 +271,7 @@ static const dmap_type dmap_types[] = {
 	{ "pret", DMAP_DICT, "dpap.retryids" },
 	{ "pwth", DMAP_UINT, "dpap.imagepixelwidth" }
 };
-static const size_t dmap_type_count = sizeof(dmap_types) / sizeof(dmap_type);
+static const size_t dmap_field_count = sizeof(dmap_fields) / sizeof(dmap_field);
 
 typedef int (*sort_func) (const void *, const void *);
 
@@ -285,23 +285,23 @@ const char *dmap_version_string() {
 	       DMAP_STRINGIFY(DMAP_VERSION_PATCH);
 }
 
-static int dmap_type_sort(const dmap_type *a, const dmap_type *b) {
+static int dmap_field_sort(const dmap_field *a, const dmap_field *b) {
 	return strncmp(a->code, b->code, 4);
 }
 
-static const dmap_type *dmap_type_from_code(const char *code) {
-	dmap_type key;
+static const dmap_field *dmap_field_from_code(const char *code) {
+	dmap_field key;
 	key.code = code;
-	return bsearch(&key, dmap_types, dmap_type_count, sizeof(dmap_type), (sort_func)dmap_type_sort);
+	return bsearch(&key, dmap_fields, dmap_field_count, sizeof(dmap_field), (sort_func)dmap_field_sort);
 }
 
 const char *dmap_name_from_code(const char *code) {
-	const dmap_type *type;
+	const dmap_field *field;
 	if (!code)
 		return NULL;
 
-	type = dmap_type_from_code(code);
-	return type ? type->name : NULL;
+	field = dmap_field_from_code(code);
+	return field ? field->name : NULL;
 }
 
 static uint16_t dmap_read_u16(const char *buf) {
@@ -339,8 +339,8 @@ static int64_t dmap_read_i64(const char *buf) {
 }
 
 int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
-	const dmap_type *t;
-	DMAP_FIELD field_type;
+	const dmap_field *field;
+	DMAP_TYPE field_type;
 	size_t field_len;
 	const char *field_name;
 	const char *p = buf;
@@ -353,7 +353,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 
 	while (end - p >= 8) {
 		strncpy(code, p, 4);
-		t = dmap_type_from_code(code);
+		field = dmap_field_from_code(code);
 		p += 4;
 
 		field_len = dmap_read_u32(p);
@@ -362,9 +362,9 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 		if (p + field_len > end)
 			return -1;
 
-		if (t) {
-			field_type = t->type;
-			field_name = t->name;
+		if (field) {
+			field_type = field->type;
+			field_name = field->name;
 		} else {
 			/* Make a best guess of the type */
 			field_type = DMAP_UNKNOWN;
