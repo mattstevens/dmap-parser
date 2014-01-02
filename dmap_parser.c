@@ -305,7 +305,7 @@ const char *dmap_name_from_code(const char *code) {
 }
 
 static uint16_t dmap_read_u16(const char *buf) {
-	return ((uint16_t)(buf[0] & 0xff) << 8) | (buf[1] & 0xff);
+	return (uint16_t)(((buf[0] & 0xff) << 8) | (buf[1] & 0xff));
 }
 
 static int16_t dmap_read_i16(const char *buf) {
