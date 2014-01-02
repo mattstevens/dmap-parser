@@ -9,21 +9,21 @@
 #include <unistd.h>
 #include <errno.h>
 
-char prefix[64] = {};
+static char prefix[64] = {0};
 static const char hexchars[] = "0123456789abcdef";
 
-void indent() {
+static void indent() {
 	strcat(prefix, "  ");
 }
 
-void outdent() {
+static void outdent() {
 	size_t len = strlen(prefix);
 	if (len >= 2) {
 		prefix[len - 2] = '\0';
 	}
 }
 
-void append(const char *line, ...) {
+static void append(const char *line, ...) {
 	va_list args;
 	va_start(args, line);
 
@@ -34,24 +34,24 @@ void append(const char *line, ...) {
 	va_end(args);
 }
 
-void on_dict_start(void *ctx, const char *code, const char *name) {
+static void on_dict_start(void *ctx, const char *code, const char *name) {
 	append("%s:", name);
 	indent();
 }
 
-void on_dict_end(void *ctx, const char *code, const char *name) {
+static void on_dict_end(void *ctx, const char *code, const char *name) {
 	outdent();
 }
 
-void on_int32(void *ctx, const char *code, const char *name, int32_t value) {
+static void on_int32(void *ctx, const char *code, const char *name, int32_t value) {
 	append("%s: %d", name, value);
 }
 
-void on_int64(void *ctx, const char *code, const char *name, int64_t value) {
+static void on_int64(void *ctx, const char *code, const char *name, int64_t value) {
 	append("%s: %lld", name, value);
 }
 
-void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
+static void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
 	if (strcmp(code, "mcnm") == 0) {
 		char buf[5] = {
 			(char)((value >> 24) & 0xff),
@@ -67,11 +67,11 @@ void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
 	append("%s: %u", name, value);
 }
 
-void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
+static void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
 	append("%s: %llu", name, value);
 }
 
-void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
+static void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
 	char buf[32];
 	time_t timeval = value;
 	struct tm *timestruct = gmtime(&timeval);
@@ -79,7 +79,7 @@ void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
 	append("%s: %s", name, buf);
 }
 
-void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
+static void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
 	char *str = (char *)malloc(len + 1);
 	strncpy(str, buf, len);
 	str[len] = '\0';
@@ -87,7 +87,7 @@ void on_string(void *ctx, const char *code, const char *name, const char *buf, s
 	free(str);
 }
 
-void on_data(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
+static void on_data(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
 	size_t i;
 	printf("%s%s: ", prefix, name);
 	for (i = 0; i < len; i++) {
