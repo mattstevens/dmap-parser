@@ -327,6 +327,9 @@ static void outdent() {
 	}
 }
 
+#if defined(__GNUC__)
+__attribute__((format(printf, 1, 2)))
+#endif
 static void append(const char *line, ...) {
 	va_list args;
 	va_start(args, line);
