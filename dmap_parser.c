@@ -4,8 +4,8 @@
 #include <string.h>
 #include <ctype.h>
 
-#define DMAP_STRINGIFY(x) DMAP_STRINGIFY_(x)
 #define DMAP_STRINGIFY_(x) #x
+#define DMAP_STRINGIFY(x) DMAP_STRINGIFY_(x)
 
 typedef enum {
 	DMAP_UNKNOWN,
