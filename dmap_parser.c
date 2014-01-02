@@ -286,7 +286,7 @@ const char *dmap_version_string(void) {
 }
 
 static int dmap_field_sort(const dmap_field *a, const dmap_field *b) {
-	return strncmp(a->code, b->code, 4);
+	return memcmp(a->code, b->code, 4);
 }
 
 static const dmap_field *dmap_field_from_code(const char *code) {
