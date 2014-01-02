@@ -275,11 +275,11 @@ static const size_t dmap_field_count = sizeof(dmap_fields) / sizeof(dmap_field);
 
 typedef int (*sort_func) (const void *, const void *);
 
-int dmap_version() {
+int dmap_version(void) {
 	return DMAP_VERSION;
 }
 
-const char *dmap_version_string() {
+const char *dmap_version_string(void) {
 	return DMAP_STRINGIFY(DMAP_VERSION_MAJOR) "."
 	       DMAP_STRINGIFY(DMAP_VERSION_MINOR) "."
 	       DMAP_STRINGIFY(DMAP_VERSION_PATCH);

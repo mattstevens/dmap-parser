@@ -55,12 +55,12 @@ typedef struct {
  * The version number format is (major * 1000000) + (minor * 1000) + patch.
  * For example, the value for version 1.2.3 is 1002003.
  */
-int dmap_version();
+int dmap_version(void);
 
 /**
  * Returns the library version as a string.
  */
-const char *dmap_version_string();
+const char *dmap_version_string(void);
 
 /**
  * Returns the name associated with the provided content code, or NULL if there
