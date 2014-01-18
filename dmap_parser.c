@@ -200,6 +200,7 @@ static const dmap_field dmap_fields[] = {
 	{ "cmsr", DMAP_UINT, "dmcp.serverrevision" },
 	{ "cmst", DMAP_DICT, "dmcp.playstatus" },
 	{ "cmvo", DMAP_UINT, "dmcp.volume" },
+	{ "f\215ch", DMAP_UINT, "dmap.haschildcontainers" },
 	{ "ipsa", DMAP_DICT, "dpap.iphotoslideshowadvancedoptions" },
 	{ "ipsl", DMAP_DICT, "dpap.iphotoslideshowoptions" },
 	{ "mbcl", DMAP_DICT, "dmap.bag" },
