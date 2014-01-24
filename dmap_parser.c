@@ -459,7 +459,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 			case DMAP_VERS:
 				if (settings->on_string && field_len >= 4) {
 					char version[20];
-					sprintf(version, "%d.%d", dmap_read_u16(p), dmap_read_u16(p+2));
+					sprintf(version, "%u.%u", dmap_read_u16(p), dmap_read_u16(p+2));
 					settings->on_string(settings->ctx, code, field_name, version, strlen(version));
 				}
 				break;
