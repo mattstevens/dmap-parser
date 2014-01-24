@@ -383,7 +383,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 				size_t i;
 				int is_string = 1;
 				for (i=0; i < field_len; i++) {
-					if (!isascii(p[i]) || p[i] < 2) {
+					if (!isprint(p[i])) {
 						is_string = 0;
 						break;
 					}
