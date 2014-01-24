@@ -9,6 +9,21 @@
 #include <unistd.h>
 #include <errno.h>
 
+typedef enum {
+	UINT8   = 1,
+	INT8    = 2,
+	UINT16  = 3,
+	INT16   = 4,
+	UINT32  = 5,
+	INT32   = 6,
+	UINT64  = 7,
+	INT64   = 8,
+	STRING  = 9,
+	DATE    = 10,
+	VERSION = 11,
+	LIST    = 12
+} CONTENT_CODE_TYPE;
+
 static char prefix[64] = {0};
 static const char hexchars[] = "0123456789abcdef";
 
@@ -65,6 +80,51 @@ static void on_uint32(void *ctx, const char *code, const char *name, uint32_t va
 		};
 		append("%s: %s", name, buf);
 		return;
+	} else if (strcmp(code, "mcty") == 0) {
+		const char *description = NULL;
+		switch ((CONTENT_CODE_TYPE)value) {
+			case UINT8:
+				description = "unsigned 8-bit integer";
+				break;
+			case INT8:
+				description = "8-bit integer";
+				break;
+			case UINT16:
+				description = "unsigned 16-bit integer";
+				break;
+			case INT16:
+				description = "16-bit integer";
+				break;
+			case UINT32:
+				description = "unsigned 32-bit integer";
+				break;
+			case INT32:
+				description = "32-bit integer";
+				break;
+			case UINT64:
+				description = "unsigned 64-bit integer";
+				break;
+			case INT64:
+				description = "64-bit integer";
+				break;
+			case STRING:
+				description = "string";
+				break;
+			case DATE:
+				description = "date";
+				break;
+			case VERSION:
+				description = "version";
+				break;
+			case LIST:
+				description = "list";
+				break;
+		}
+
+		if (description != NULL) {
+			append("%s: %s (%u)", name, description, value);
+			return;
+		}
 	}
 
 	append("%s: %u", name, value);
