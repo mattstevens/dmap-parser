@@ -399,7 +399,7 @@ int dmap_parse(const dmap_settings *settings, const char *buf, size_t len) {
 				switch (field_len) {
 					case 1:
 						if (settings->on_uint32)
-							settings->on_uint32(settings->ctx, code, field_name, *p);
+							settings->on_uint32(settings->ctx, code, field_name, (unsigned char)*p);
 						break;
 					case 2:
 						if (settings->on_uint32)
