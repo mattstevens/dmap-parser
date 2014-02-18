@@ -259,6 +259,7 @@ static const dmap_field dmap_fields[] = {
 	{ "peed", DMAP_DATE, "com.apple.itunes.photos.exposure-date" },
 	{ "pefc", DMAP_DICT, "com.apple.itunes.photos.faces" },
 	{ "peki", DMAP_UINT, "com.apple.itunes.photos.key-image-id" },
+	{ "pekm", DMAP_DICT, "com.apple.itunes.photos.key-image" },
 	{ "pemd", DMAP_DATE, "com.apple.itunes.photos.modification-date" },
 	{ "pfai", DMAP_DICT, "dpap.failureids" },
 	{ "pfdt", DMAP_DICT, "dpap.filedata" },
