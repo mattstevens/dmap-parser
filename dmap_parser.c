@@ -75,6 +75,7 @@ static const dmap_field dmap_fields[] = {
 	{ "aeRP", DMAP_UINT, "com.apple.itunes.rental-pb-start" },
 	{ "aeRS", DMAP_UINT, "com.apple.itunes.rental-start" },
 	{ "aeRU", DMAP_UINT, "com.apple.itunes.rental-pb-duration" },
+	{ "aeRf", DMAP_UINT, "com.apple.itunes.is-featured" },
 	{ "aeSE", DMAP_UINT, "com.apple.itunes.store-pers-id" },
 	{ "aeSF", DMAP_UINT, "com.apple.itunes.itms-storefrontid" },
 	{ "aeSG", DMAP_UINT, "com.apple.itunes.saved-genius" },
