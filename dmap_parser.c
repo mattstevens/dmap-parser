@@ -505,7 +505,6 @@ static int dmap_parse_internal(const dmap_settings *settings, const char *buf, s
 			case DMAP_ITEM:
 				/* Unreachable: listing item types are always mapped to another type */
 				abort();
-				break;
 			case DMAP_UNKNOWN:
 				break;
 		}
