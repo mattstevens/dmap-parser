@@ -80,10 +80,10 @@ static const test tests[] = {
 	"Unmapped integer as data",
 	{
 	0x6d, 0x70, 0x65, 0x72, 0x00, 0x00, 0x00, 0x10, 0x00, 0x01, 0x02, 0x03,
-	0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f
+	0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff
 	},
 	24,
-	"dmap.persistentid: <00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f>\n"
+	"dmap.persistentid: <00 01 02 03 04 05 06 07 08 09 aa bb cc dd ee ff>\n"
 },
 {
 	"Data",
@@ -509,8 +509,8 @@ static void on_data(void *ctx, const char *code, const char *name, const char *b
 		if (i > 0)
 			*p++ = ' ';
 
-		*p++ = hexchars[buf[i] >> 4];
-		*p++ = hexchars[buf[i] & 0x0f];
+		*p++ = hexchars[(unsigned char)buf[i] >> 4];
+		*p++ = hexchars[(unsigned char)buf[i] & 0x0f];
 	}
 	*p = '\0';
 	append("%s: <%s>", name, str);

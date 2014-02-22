@@ -154,8 +154,8 @@ static void on_data(void *ctx, const char *code, const char *name, const char *b
 	size_t i;
 	printf("%s%s: ", prefix, name);
 	for (i = 0; i < len; i++) {
-		putc(hexchars[buf[i] >> 4], stdout);
-		putc(hexchars[buf[i] & 0x0f], stdout);
+		putc(hexchars[(unsigned char)buf[i] >> 4], stdout);
+		putc(hexchars[(unsigned char)buf[i] & 0x0f], stdout);
 		putc(' ', stdout);
 	}
 	printf("\n");
