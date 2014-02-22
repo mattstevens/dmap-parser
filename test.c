@@ -453,7 +453,11 @@ static void append(const char *line, ...) {
 
 	strcat(&output[outpos], prefix);
 	outpos += strlen(prefix);
-	outpos += vsprintf(&output[outpos], line, args);
+	int count = vsprintf(&output[outpos], line, args);
+	if (count < 0) {
+		abort();
+	}
+	outpos += (size_t)count;
 	strcat(&output[outpos], "\n");
 	outpos++;
 
