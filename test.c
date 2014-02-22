@@ -14,7 +14,7 @@ static const char hexchars[] = "0123456789abcdef";
 
 typedef struct {
 	const char *name;
-	const char msg[1024];
+	const uint8_t msg[1024];
 	size_t msglen;
 	const char *expected;
 } test;
@@ -550,7 +550,7 @@ int main() {
 		output[0] = '\0';
 		outpos = 0;
 		prefix[0] = '\0';
-		result = dmap_parse(&settings, tests[i].msg, tests[i].msglen);
+		result = dmap_parse(&settings, (const char *)tests[i].msg, tests[i].msglen);
 		if (tests[i].expected != NULL) {
 			if (result != 0) {
 				failcount++;
