@@ -1,6 +1,8 @@
 CFLAGS += -Wall -Wextra -Werror -Os
 APPCFLAGS = $(CFLAGS) -Wno-unused-parameter
 
+all: dmapprint test
+
 test: testapp
 	@ ./testapp
 
