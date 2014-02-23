@@ -27,6 +27,7 @@ typedef enum {
 
 static char prefix[64] = {0};
 static const char hexchars[] = "0123456789abcdef";
+static int rawcodes = 0;
 
 static void indent() {
 	strcat(prefix, "  ");
@@ -53,8 +54,12 @@ static void append(const char *line, ...) {
 	va_end(args);
 }
 
+static inline const char *display_name(const char *code, const char *name) {
+	return rawcodes ? code : name;
+}
+
 static void on_dict_start(void *ctx, const char *code, const char *name) {
-	append("%s:", name);
+	append("%s:", display_name(code, name));
 	indent();
 }
 
@@ -63,11 +68,11 @@ static void on_dict_end(void *ctx, const char *code, const char *name) {
 }
 
 static void on_int32(void *ctx, const char *code, const char *name, int32_t value) {
-	append("%s: %d", name, value);
+	append("%s: %d", display_name(code, name), value);
 }
 
 static void on_int64(void *ctx, const char *code, const char *name, int64_t value) {
-	append("%s: %lld", name, value);
+	append("%s: %lld", display_name(code, name), value);
 }
 
 static void on_uint32(void *ctx, const char *code, const char *name, uint32_t value) {
@@ -79,7 +84,7 @@ static void on_uint32(void *ctx, const char *code, const char *name, uint32_t va
 			(char)(value & 0xff),
 			0
 		};
-		append("%s: %s", name, buf);
+		append("%s: %s", display_name(code, name), buf);
 		return;
 	} else if (strcmp(code, "mcty") == 0) {
 		const char *description = NULL;
@@ -123,16 +128,16 @@ static void on_uint32(void *ctx, const char *code, const char *name, uint32_t va
 		}
 
 		if (description != NULL) {
-			append("%s: %s (%u)", name, description, value);
+			append("%s: %s (%u)", display_name(code, name), description, value);
 			return;
 		}
 	}
 
-	append("%s: %u", name, value);
+	append("%s: %u", display_name(code, name), value);
 }
 
 static void on_uint64(void *ctx, const char *code, const char *name, uint64_t value) {
-	append("%s: %llu", name, value);
+	append("%s: %llu", display_name(code, name), value);
 }
 
 static void on_date(void *ctx, const char *code, const char *name, uint32_t value) {
@@ -140,20 +145,20 @@ static void on_date(void *ctx, const char *code, const char *name, uint32_t valu
 	time_t timeval = value;
 	struct tm *timestruct = gmtime(&timeval);
 	strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S +0000", timestruct);
-	append("%s: %s", name, buf);
+	append("%s: %s", display_name(code, name), buf);
 }
 
 static void on_string(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
 	char *str = (char *)malloc(len + 1);
 	strncpy(str, buf, len);
 	str[len] = '\0';
-	append("%s: %s", name, str);
+	append("%s: %s", display_name(code, name), str);
 	free(str);
 }
 
 static void on_data(void *ctx, const char *code, const char *name, const char *buf, size_t len) {
 	size_t i;
-	printf("%s%s: ", prefix, name);
+	printf("%s%s: ", prefix, display_name(code, name));
 	for (i = 0; i < len; i++) {
 		putc(hexchars[(unsigned char)buf[i] >> 4], stdout);
 		putc(hexchars[(unsigned char)buf[i] & 0x0f], stdout);
@@ -171,6 +176,7 @@ static void print_usage(void) {
 	"\n"
 	"Options:\n"
 	"  -h, --help       Show this help message and exit\n"
+	"  -r, --raw-codes  Don't map content codes to human-readable names\n"
 	"      --version    Show the version and exit \n");
 }
 
@@ -195,6 +201,7 @@ int main(int argc, char *argv[]) {
 
 	static struct option longopts[] = {
 		{ "help",         no_argument,        NULL,          'h' },
+		{ "raw-codes",    no_argument,        NULL,          'r' },
 		{ "version",      no_argument,        NULL,          'v' },
 		{ NULL,           0,                  NULL,           0  }
 	};
@@ -204,6 +211,9 @@ int main(int argc, char *argv[]) {
 			case 'h':
 				print_usage();
 				return 0;
+			case 'r':
+				rawcodes = 1;
+				break;
 			case 'v':
 				printf("dmapprint %s\n", dmap_version_string());
 				return 0;
