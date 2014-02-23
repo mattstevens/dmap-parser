@@ -448,12 +448,13 @@ static void outdent() {
 __attribute__((format(printf, 1, 2)))
 #endif
 static void append(const char *line, ...) {
+	int count;
 	va_list args;
 	va_start(args, line);
 
 	strcat(&output[outpos], prefix);
 	outpos += strlen(prefix);
-	int count = vsprintf(&output[outpos], line, args);
+	count = vsprintf(&output[outpos], line, args);
 	if (count < 0) {
 		abort();
 	}
