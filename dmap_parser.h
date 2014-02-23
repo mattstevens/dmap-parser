@@ -8,7 +8,7 @@ extern "C" {
 #include <sys/types.h>
 
 #define DMAP_VERSION_MAJOR 1
-#define DMAP_VERSION_MINOR 1
+#define DMAP_VERSION_MINOR 2
 #define DMAP_VERSION_PATCH 0
 
 #define DMAP_VERSION (DMAP_VERSION_MAJOR * 1000000 + \
