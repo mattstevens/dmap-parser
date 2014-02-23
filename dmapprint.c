@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
+#include <getopt.h>
 
 typedef enum {
 	UINT8   = 1,
@@ -161,6 +162,18 @@ static void on_data(void *ctx, const char *code, const char *name, const char *b
 	printf("\n");
 }
 
+static void print_usage(void) {
+	printf(""
+	"Usage: dmapprint [options] [file]\n"
+	"\n"
+	"Reads Digital Media Access Protocol (DMAP) input from a file or standard input\n"
+	"and prints it in a human-readable format.\n"
+	"\n"
+	"Options:\n"
+	"  -h, --help       Show this help message and exit\n"
+	"      --version    Show the version and exit \n");
+}
+
 int main(int argc, char *argv[]) {
 	dmap_settings settings = {
 		.on_dict_start = on_dict_start,
@@ -178,19 +191,36 @@ int main(int argc, char *argv[]) {
 	char *buf = NULL;
 	size_t size = 0;
 	ssize_t result = 0;
+	int optchar;
 
-	if (argc >= 2) {
-		if (strcmp(argv[1], "--help") == 0) {
-			printf("Usage: dmapprint [file]\n\n"
-			"Accepts Digital Media Access Protocol input from a file or "
-			"standard input and\nprints it in a human-readable format.\n");
-			return 0;
-		} else if (strcmp(argv[1], "--version") == 0) {
-			printf("dmapprint %s\n", dmap_version_string());
-			return 0;
+	static struct option longopts[] = {
+		{ "help",         no_argument,        NULL,          'h' },
+		{ "version",      no_argument,        NULL,          'v' },
+		{ NULL,           0,                  NULL,           0  }
+	};
+
+	while ((optchar = getopt_long(argc, argv, "hr", longopts, NULL)) != -1) {
+		switch (optchar) {
+			case 'h':
+				print_usage();
+				return 0;
+			case 'v':
+				printf("dmapprint %s\n", dmap_version_string());
+				return 0;
+			case 0:
+				break;
+			case '?':
+				return 1;
+			default:
+				fprintf(stderr, "unhandled option -%c\n", optchar);
+				return 1;
 		}
+	}
+	argc -= optind;
+	argv += optind;
 
-		const char *path = argv[1];
+	if (argc >= 1) {
+		const char *path = argv[0];
 
 		struct stat s;
 		if (stat(path, &s) != 0 || s.st_size < 0) {
