@@ -193,11 +193,11 @@ int main(int argc, char *argv[]) {
 		const char *path = argv[1];
 
 		struct stat s;
-		if (stat(path, &s) != 0) {
+		if (stat(path, &s) != 0 || s.st_size < 0) {
 			return 1;
 		}
 
-		size = s.st_size;
+		size = (size_t)s.st_size;
 		buf = malloc(size);
 
 		int fd = open(path, O_RDONLY);
@@ -216,7 +216,7 @@ int main(int argc, char *argv[]) {
 		size_t bufIncrement = 60 * 1024;
 
 		do {
-			size += result;
+			size += (size_t)result;
 			buf = realloc(buf, size + bufIncrement);
 			result = read(fileno(stdin), &buf[size], bufIncrement);
 		} while (result > 0);
