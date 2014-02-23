@@ -1,4 +1,4 @@
-1.2.0
+1.2.0 (2014-02-23)
 
 * Added mappings for some iTunes Radio codes
 * Added support for non-dictionary list codes such as daap.browseartistlisting
