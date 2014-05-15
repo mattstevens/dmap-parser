@@ -106,6 +106,7 @@ static const dmap_field dmap_fields[] = {
 	{ "aeSU",    DMAP_UINT, 0,         "com.apple.itunes.season-num" },
 	{ "aeSV",    DMAP_VERS, 0,         "com.apple.itunes.music-sharing-version" },
 	{ "aeXD",    DMAP_STR,  0,         "com.apple.itunes.xid" },
+	{ "aecp",    DMAP_STR,  0,         "com.apple.itunes.collection-description" },
 	{ "aels",    DMAP_UINT, 0,         "com.apple.itunes.liked-state" },
 	{ "aemi",    DMAP_DICT, 0,         "com.apple.itunes.media-kind-listing-item" },
 	{ "aeml",    DMAP_DICT, 0,         "com.apple.itunes.media-kind-listing" },
