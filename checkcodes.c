@@ -89,7 +89,7 @@ static void on_dict_end(void *ctx, const char *code, const char *name) {
 			}
 
 			if (state) {
-				printf("%s { \"%s\", %s \"%s\" },\n", state, current_type.code, dmap_type_for_type(current_type.type), current_type.name);
+				printf("%s { \"%s\",    %s 0,         \"%s\" },\n", state, current_type.code, dmap_type_for_type(current_type.type), current_type.name);
 			}
 		}
 		memset(&current_type, 0, sizeof(current_type));
