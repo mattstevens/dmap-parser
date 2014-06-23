@@ -1,3 +1,7 @@
+1.2.1 (2014-06-22)
+
+* Fixed a potential debug assertion on Windows
+
 1.2.0 (2014-02-23)
 
 * Added mappings for some iTunes Radio codes
