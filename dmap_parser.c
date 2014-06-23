@@ -405,7 +405,10 @@ static int dmap_parse_internal(const dmap_settings *settings, const char *buf, s
 
 			if (field_len >= 8) {
 				/* Look for a four char code followed by a length within the current field */
-				if (isalpha(p[0]) && isalpha(p[1]) && isalpha(p[2]) && isalpha(p[3])) {
+				if (isalpha(p[0] & 0xff) &&
+				    isalpha(p[1] & 0xff) &&
+				    isalpha(p[2] & 0xff) &&
+				    isalpha(p[3] & 0xff)) {
 					if (dmap_read_u32(p + 4) < field_len)
 						field_type = DMAP_DICT;
 				}
@@ -415,7 +418,7 @@ static int dmap_parse_internal(const dmap_settings *settings, const char *buf, s
 				size_t i;
 				int is_string = 1;
 				for (i=0; i < field_len; i++) {
-					if (!isprint(p[i])) {
+					if (!isprint(p[i] & 0xff)) {
 						is_string = 0;
 						break;
 					}
