@@ -9,7 +9,7 @@ extern "C" {
 
 #define DMAP_VERSION_MAJOR 1
 #define DMAP_VERSION_MINOR 2
-#define DMAP_VERSION_PATCH 0
+#define DMAP_VERSION_PATCH 1
 
 #define DMAP_VERSION (DMAP_VERSION_MAJOR * 1000000 + \
                       DMAP_VERSION_MINOR * 1000 + \
