@@ -59,7 +59,7 @@ static const dmap_field dmap_fields[] = {
 	{ "aeCF",    DMAP_UINT, 0,         "com.apple.itunes.cloud-flavor-id" },
 	{ "aeCI",    DMAP_UINT, 0,         "com.apple.itunes.itms-composerid" },
 	{ "aeCK",    DMAP_UINT, 0,         "com.apple.itunes.cloud-library-kind" },
-	{ "aeCM",    DMAP_UINT, 0,         "com.apple.itunes.cloud-status" },
+	{ "aeCM",    DMAP_UINT, 0,         "com.apple.itunes.cloud-match-type" },
 	{ "aeCR",    DMAP_STR,  0,         "com.apple.itunes.content-rating" } ,
 	{ "aeCS",    DMAP_UINT, 0,         "com.apple.itunes.artworkchecksum" },
 	{ "aeCU",    DMAP_UINT, 0,         "com.apple.itunes.cloud-user-id" },
