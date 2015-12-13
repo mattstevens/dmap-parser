@@ -117,6 +117,7 @@ static const dmap_field dmap_fields[] = {
 	{ "agmi",    DMAP_UINT, 0,         "daap.groupmatchedqueryitemcount" },
 	{ "agrp",    DMAP_STR,  0,         "daap.songgrouping" },
 	{ "ajal",    DMAP_UINT, 0,         "com.apple.itunes.store.album-liked-state" },
+	{ "ajca",    DMAP_UINT, 0,         "com.apple.itunes.store.show-composer-as-artist" },
 	{ "aply",    DMAP_DICT, 0,         "daap.databaseplaylists" },
 	{ "aprm",    DMAP_UINT, 0,         "daap.playlistrepeatmode" },
 	{ "apro",    DMAP_VERS, 0,         "daap.protocolversion" },
