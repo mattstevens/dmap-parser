@@ -64,6 +64,7 @@ static const dmap_field dmap_fields[] = {
 	{ "aeCS",    DMAP_UINT, 0,         "com.apple.itunes.artworkchecksum" },
 	{ "aeCU",    DMAP_UINT, 0,         "com.apple.itunes.cloud-user-id" },
 	{ "aeCd",    DMAP_UINT, 0,         "com.apple.itunes.cloud-id" },
+	{ "aeDE",    DMAP_STR,  0,         "com.apple.itunes.longest-content-description" },
 	{ "aeDL",    DMAP_UINT, 0,         "com.apple.itunes.drm-downloader-user-id" },
 	{ "aeDP",    DMAP_UINT, 0,         "com.apple.itunes.drm-platform-id" },
 	{ "aeDR",    DMAP_UINT, 0,         "com.apple.itunes.drm-user-id" },
